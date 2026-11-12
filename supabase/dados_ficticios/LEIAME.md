@@ -11,10 +11,27 @@ Os MASPs começam com `91`, então não conflitam com os de `002_dados_teste.sql
 |---|---|---|
 | 01_dados_funcionais.csv | dados_funcionais | 60 (43 efetivos, 17 contratos) |
 | 02_dados_frequencia.csv | dados_frequencia | 720 (nov/2025 a out/2026) |
-| 03_dados_ferias.csv | dados_ferias | 120 (2025 e 2026) |
-| 04_dados_ferias_periodos.csv | dados_ferias_periodos | 210 |
-| 05_dados_folgas.csv | dados_folgas | 153 |
-| 06_dados_regras_rh.csv | dados_regras_rh | 12 regras extras (`validado = false`) |
+| 03_dados_ferias.csv | dados_ferias | 115 (2025 e 2026) |
+| 04_dados_ferias_periodos.csv | dados_ferias_periodos | 181 |
+| 05_dados_folgas.csv | dados_folgas | 144 |
+| 06_dados_regras_rh.csv | dados_regras_rh | 9 regras extras (`validado = false`) — férias e folgas ficam no `003_regras_ferias_folgas.sql` |
+
+## Férias seguem as regras do `003_regras_ferias_folgas.sql`
+
+- Efetivo: 25 dias úteis (sábados, domingos e feriados nacionais não contam;
+  ponto facultativo conta). Contratado: 30 dias corridos — a regra de
+  contratados ainda está **a confirmar** (FER-03).
+- Primeiras férias só depois de 11 meses de exercício.
+- No máximo 2 períodos por ano, cada um com pelo menos 10 dias úteis.
+- Todo período começa dentro do ano de referência, até o último dia útil.
+- Sem acúmulo: as férias de 2025 estão todas gozadas.
+
+## Já importou a versão anterior? Use a recarga
+
+Se você importou os dados fictícios **antes** das regras de férias, rode só
+`recarregar_ferias_folgas.sql` no **SQL Editor**. Ele troca férias, períodos e
+folgas dos MASPs `91…` pelos novos e corrige os períodos do `002`. Cadastro,
+frequência e regras não mudam. Não é preciso reimportar os CSVs.
 
 ## Opção 1 — importar os CSVs (Table Editor)
 
@@ -45,10 +62,10 @@ repetida.
 
 | MASP | Situação para perguntar à IA |
 |---|---|
-| 91000023 | Contrato vencendo em 07/02/2027 |
-| 91000075 | Em férias agora (02/11 a 13/11/2026) |
-| 91000052 | Vários lançamentos de folga compensativa |
-| 91000011 | Efetivo, enfermeiro, férias de 2025 e 2026 |
+| 91000023 | Contrato vencendo em 07/02/2027 e 15 dias de férias de 2026 a programar |
+| 91000116 | Em férias agora (10/11 a 26/11/2026; 20/11 é feriado e não conta) |
+| 91000107 | Vários lançamentos de folga compensatória |
+| 91000011 | Efetivo; férias de 2026 em 2 períodos, o próximo começa em 19/11/2026 |
 
 Cadastre-se no app com esses MASPs (um de cada vez) e confira que cada um só
 vê os próprios dados.

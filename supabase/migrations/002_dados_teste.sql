@@ -61,18 +61,19 @@ insert into public.dados_ferias (masp, ano_referencia, dias_direito) values
 insert into public.dados_ferias_periodos
   (masp, ano_referencia, data_inicio, data_fim, dias, situacao)
 values
-  -- João: tirou 15, tem 15 programados para janeiro
+  -- Regras: no máximo 2 períodos de pelo menos 10 dias úteis, começando
+  -- dentro do ano; feriados nacionais não contam (ver 003).
+  -- João (contrato, 30 dias corridos): tirou 15, tem 15 programados em dezembro
   ('90000011', 2026, '2026-07-06', '2026-07-20', 15, 'gozada'),
-  ('90000011', 2026, '2027-01-04', '2027-01-18', 15, 'programada'),
-  -- Ana: tirou 10, programou 15, cancelou um período antigo
+  ('90000011', 2026, '2026-12-07', '2026-12-21', 15, 'programada'),
+  -- Ana: tirou 10 dias úteis, programou 15 (25/12 é feriado e não conta)
   ('90000029', 2026, '2026-04-06', '2026-04-17', 10, 'gozada'),
-  ('90000029', 2026, '2026-05-04', '2026-05-08',  5, 'cancelada'),
-  ('90000029', 2026, '2026-12-07', '2026-12-29', 15, 'programada'),
-  -- Maria: tirou tudo
+  ('90000029', 2026, '2026-12-07', '2026-12-28', 15, 'programada'),
+  -- Maria: tirou tudo (Carnaval é ponto facultativo e conta como dia útil)
   ('90000037', 2026, '2026-02-02', '2026-03-06', 25, 'gozada'),
   -- Carlos: nada marcado ainda
-  -- Pedro: em gozo agora (ajuste as datas se testar em outra época)
-  ('90000053', 2026, '2026-11-09', '2026-11-27', 15, 'em_gozo');
+  -- Pedro: em gozo agora (20/11 é feriado e não conta)
+  ('90000053', 2026, '2026-11-09', '2026-11-30', 15, 'em_gozo');
 
 
 -- -----------------------------------------------------------------------------

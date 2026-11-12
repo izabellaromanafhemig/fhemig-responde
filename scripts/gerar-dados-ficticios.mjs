@@ -33,21 +33,45 @@ const chance = (p) => rnd() < p;
 const d = (s) => new Date(`${s}T00:00:00Z`);
 const iso = (dt) => dt.toISOString().slice(0, 10);
 const addDias = (dt, n) => new Date(dt.getTime() + n * 86400000);
+// Feriados nacionais (não contam como dia útil). Ponto facultativo
+// (Carnaval, Corpus Christi) conta como dia útil — regra FER-01.
+const FERIADOS = new Set([
+  "2025-01-01", "2025-04-18", "2025-04-21", "2025-05-01", "2025-09-07",
+  "2025-10-12", "2025-11-02", "2025-11-15", "2025-11-20", "2025-12-25",
+  "2026-01-01", "2026-04-03", "2026-04-21", "2026-05-01", "2026-09-07",
+  "2026-10-12", "2026-11-02", "2026-11-15", "2026-11-20", "2026-12-25",
+  "2027-01-01",
+]);
 const fimDeSemana = (dt) => [0, 6].includes(dt.getUTCDay());
+const diaUtil = (dt) => !fimDeSemana(dt) && !FERIADOS.has(iso(dt));
 function proximoDiaUtil(dt) {
   let x = dt;
-  while (fimDeSemana(x)) x = addDias(x, 1);
+  while (!diaUtil(x)) x = addDias(x, 1);
+  return x;
+}
+function ultimoDiaUtilDoAno(ano) {
+  let x = d(`${ano}-12-31`);
+  while (!diaUtil(x)) x = addDias(x, -1);
   return x;
 }
 /** Data final contando `n` dias úteis a partir de `inicio` (inclusive). */
 function fimPorDiasUteis(inicio, n) {
   let x = inicio;
-  let contados = fimDeSemana(x) ? 0 : 1;
+  let contados = diaUtil(x) ? 1 : 0;
   while (contados < n) {
     x = addDias(x, 1);
-    if (!fimDeSemana(x)) contados++;
+    if (diaUtil(x)) contados++;
   }
   return x;
+}
+function addMeses(dt, n) {
+  const x = new Date(dt);
+  x.setUTCMonth(x.getUTCMonth() + n);
+  return x;
+}
+function dataEntre(a, b) {
+  if (b <= a) return a;
+  return addDias(a, Math.floor(rnd() * ((b - a) / 86400000 + 1)));
 }
 function dataAleatoria(inicio, fim) {
   const a = d(inicio).getTime();
@@ -185,40 +209,57 @@ function situacao(inicio, fim) {
   if (inicio <= HOJE) return "em_gozo";
   return "programada";
 }
+// Segue as regras FER-01, FER-04, FER-07 e FER-08:
+//  - efetivo: 25 dias úteis; contratado: 30 dias corridos (regra de
+//    contratados ainda a confirmar — FER-03)
+//  - primeiras férias só após 11 meses de exercício
+//  - no máximo 2 períodos, cada um com pelo menos 10 dias úteis
+//  - todos os períodos começam dentro do ano de referência (até o último
+//    dia útil); sem acúmulo: 2025 fica todo gozado
 for (const s of funcionais) {
   const efetivo = s.vinculo === "efetivo";
   const adm = d(s.data_admissao);
+  const elegivel = proximoDiaUtil(addMeses(adm, 11));
+  const fimContrato = s.data_fim_prevista ? d(s.data_fim_prevista) : null;
+
   for (const ano of [2025, 2026]) {
-    if (adm.getUTCFullYear() > ano) continue;
-    // direito: efetivo 25 dias úteis; contrato 30 corridos (proporcional no 1º ano)
-    let direito = efetivo ? 25 : 30;
-    if (!efetivo && adm.getUTCFullYear() === ano) {
-      const meses = 12 - adm.getUTCMonth();
-      direito = Math.max(0, Math.round((30 * meses) / 12));
-    }
-    if (direito === 0) continue;
+    const ultimoUtil = ultimoDiaUtilDoAno(ano);
+    const inicioMin = new Date(Math.max(proximoDiaUtil(d(`${ano}-01-05`)), elegivel));
+    if (inicioMin > ultimoUtil) continue; // ainda não completou 11 meses
+
+    const direito = efetivo ? 25 : 30;
     ferias.push({ masp: s.masp, ano_referencia: ano, dias_direito: direito,
-      observacao: efetivo ? "25 dias úteis" : "30 dias corridos" });
+      observacao: efetivo ? "25 dias úteis" : "30 dias corridos (regra de contratados a confirmar)" });
 
-    // divide o direito em 1 a 3 períodos; parte fica sem programar
-    const partes = direito >= 20 ? pick([[direito], [15, direito - 15],
-      [10, 10, direito - 20]]) : [direito];
-    let cursor = d(`${ano}-${pick(["02", "04", "06", "07", "09"])}-01`);
-    if (cursor < adm) cursor = addDias(adm, 60);
-    const limite = ano === 2025 ? d("2026-03-31") : d("2027-03-31");
+    // 2026: ~8% ainda não marcou nada (gera alerta de férias a programar)
+    if (ano === 2026 && chance(0.08)) continue;
 
-    partes.forEach((dias, idx) => {
-      // em 2026, ~30% deixa o último período sem programar ainda
-      if (ano === 2026 && idx === partes.length - 1 && partes.length > 1 && chance(0.3)) return;
-      cursor = addDias(cursor, int(20, 90));
-      const ini = proximoDiaUtil(cursor);
-      const fim = efetivo ? fimPorDiasUteis(ini, dias) : addDias(ini, dias - 1);
-      if (fim > limite) return;
-      cursor = fim;
-      const sit = chance(0.06) && ini > HOJE ? "cancelada" : situacao(ini, fim);
-      periodos.push({ masp: s.masp, ano_referencia: ano, data_inicio: iso(ini),
-        data_fim: iso(fim), dias, situacao: sit });
-    });
+    let partes = efetivo
+      ? pick([[25], [15, 10], [10, 15], [13, 12]])
+      : pick([[30], [15, 15]]);
+    // pouco tempo até o fim do ano: um período só
+    if (partes.length === 2 && (ultimoUtil - inicioMin) / 86400000 < 100) partes = [direito];
+
+    const calcFim = (ini, dias) => (efetivo ? fimPorDiasUteis(ini, dias) : addDias(ini, dias - 1));
+
+    // 1º período
+    const limite1 = partes.length === 2 ? addDias(ultimoUtil, -80) : ultimoUtil;
+    const ini1 = proximoDiaUtil(dataEntre(inicioMin, limite1));
+    const fim1 = calcFim(ini1, partes[0]);
+    if (fimContrato && ini1 > fimContrato) continue;
+    periodos.push({ masp: s.masp, ano_referencia: ano, data_inicio: iso(ini1),
+      data_fim: iso(fim1), dias: partes[0], situacao: situacao(ini1, fim1) });
+
+    // 2º período (em 2026, ~30% ainda não programou)
+    if (partes.length === 2) {
+      if (ano === 2026 && chance(0.3)) continue;
+      let ini2 = proximoDiaUtil(dataEntre(addDias(fim1, 20), ultimoUtil));
+      if (ini2 > ultimoUtil) ini2 = ultimoUtil;
+      if (fimContrato && ini2 > fimContrato) continue;
+      const fim2 = calcFim(ini2, partes[1]);
+      periodos.push({ masp: s.masp, ano_referencia: ano, data_inicio: iso(ini2),
+        data_fim: iso(fim2), dias: partes[1], situacao: situacao(ini2, fim2) });
+    }
   }
 }
 
@@ -263,17 +304,9 @@ for (const s of funcionais) {
 }
 
 // ---------------------------------------------------------------- regras extras
-// Complementam as 14 regras do 002_dados_teste.sql (códigos diferentes).
+// Complementam as regras do 002_dados_teste.sql. Férias e folgas ficam no
+// 003_regras_ferias_folgas.sql (não repetir códigos FER-/FOL- aqui).
 const regras = [
-  ["FER-05", "Férias", "Parcelamento de férias",
-   "As férias podem ser divididas em períodos, conforme as regras do órgão e a necessidade do serviço, com autorização da chefia.",
-   "Norma interna — a confirmar", "todos", ["parcelar", "dividir", "períodos", "férias"]],
-  ["FER-06", "Férias", "Férias ao fim do contrato",
-   "No encerramento do contrato temporário, os dias de férias não gozados são indenizados de forma proporcional, com o adicional de 1/3.",
-   "Lei Estadual nº 23.750/2020 — a confirmar", "contrato", ["indenização", "proporcional", "fim do contrato", "férias"]],
-  ["FOL-03", "Folgas", "Prazo para usar folga compensativa",
-   "Créditos de folga compensativa podem ter prazo de validade. Consulte a validade no seu extrato de folgas e agende com a chefia antes do vencimento.",
-   "Norma interna — a confirmar", "todos", ["validade", "prazo", "vencer", "folga"]],
   ["FRE-03", "Frequência", "Registro de ponto",
    "A frequência é registrada diariamente. Esquecimentos ou erros de marcação devem ser justificados à chefia imediata no próprio mês.",
    "Norma interna — a confirmar", "todos", ["ponto", "marcação", "esquecimento", "frequência"]],
@@ -365,3 +398,35 @@ for (const [arquivo, tabela, linhas, colunas] of TABELAS) {
 sql += "commit;\n";
 writeFileSync(join(SAIDA, "dados_ficticios.sql"), sql, "utf8");
 console.log("dados_ficticios.sql");
+
+// Recarga de férias e folgas para quem JÁ importou os dados fictícios antigos.
+// Apaga só os MASPs fictícios "91…" e corrige os períodos do 002 (MASPs "9000…").
+let recarga = `-- RECARGA de férias e folgas fictícias (gerado por scripts/gerar-dados-ficticios.mjs)
+-- Use se você JÁ importou os dados fictícios: substitui férias, períodos e folgas
+-- dos MASPs 91… pelos novos (que seguem as regras do 003) e corrige o 002.
+-- Cadastro, frequência e regras não são alterados.
+begin;
+
+delete from public.dados_folgas where masp like '91%';
+delete from public.dados_ferias where masp like '91%'; -- apaga os períodos em cascata
+
+`;
+recarga += sqlInsert("dados_ferias", ferias, ["masp", "ano_referencia", "dias_direito", "observacao"]) + "\n";
+recarga += sqlInsert("dados_ferias_periodos", periodos,
+  ["masp", "ano_referencia", "data_inicio", "data_fim", "dias", "situacao"]) + "\n";
+recarga += sqlInsert("dados_folgas", folgas,
+  ["masp", "tipo", "dias", "origem", "data_referencia", "validade", "descricao"]) + "\n";
+recarga += `-- Correções do 002_dados_teste.sql (sem efeito se o 002 não foi usado)
+update public.dados_ferias_periodos set data_inicio = '2026-12-07', data_fim = '2026-12-21'
+  where masp = '90000011' and ano_referencia = 2026 and data_inicio = '2027-01-04';
+delete from public.dados_ferias_periodos
+  where masp = '90000029' and situacao = 'cancelada' and data_inicio = '2026-05-04';
+update public.dados_ferias_periodos set data_fim = '2026-12-28'
+  where masp = '90000029' and data_inicio = '2026-12-07';
+update public.dados_ferias_periodos set data_fim = '2026-11-30'
+  where masp = '90000053' and data_inicio = '2026-11-09';
+
+commit;
+`;
+writeFileSync(join(SAIDA, "recarregar_ferias_folgas.sql"), recarga, "utf8");
+console.log("recarregar_ferias_folgas.sql");
