@@ -14,7 +14,7 @@ Os MASPs começam com `91`, então não conflitam com os de `002_dados_teste.sql
 | 03_dados_ferias.csv | dados_ferias | 115 (2025 e 2026) |
 | 04_dados_ferias_periodos.csv | dados_ferias_periodos | 178 |
 | 05_dados_folgas.csv | dados_folgas | 159 |
-| 06_dados_regras_rh.csv | dados_regras_rh | 9 regras extras (`validado = false`) — férias e folgas ficam no `003_regras_ferias_folgas.sql` |
+| 06_dados_regras_rh.csv | dados_regras_rh | 4 regras extras (`validado = false`) — férias e folgas ficam no `003`; faltas, horas extras, luto e casamento no `004` |
 
 ## Férias seguem as regras do `003_regras_ferias_folgas.sql`
 
@@ -63,7 +63,8 @@ repetida.
 |---|---|
 | 91000023 | Contrato vencendo em 07/02/2027 e 12 dias úteis de férias de 2026 a programar |
 | 91000116 | Em férias agora (10/11 a 26/11/2026; 20/11 é feriado e não conta) |
-| 91000094 | Vários lançamentos de folga compensatória |
+| 91000406 | Todos os cartões da página de início com valores: 10 dias de férias restantes (próximas em 24/11), saldo de 4 folgas (próxima em 16/11) |
+| 91000094 | Vários lançamentos de folga, mas saldo zerado e férias de 2026 todas gozadas (bom para testar "zero") |
 | 91000011 | Efetivo; férias de 2026 em 2 períodos, o próximo começa em 19/11/2026 |
 
 Cadastre-se no app com esses MASPs (um de cada vez) e confira que cada um só

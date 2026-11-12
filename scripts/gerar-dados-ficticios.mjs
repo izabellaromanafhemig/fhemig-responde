@@ -301,26 +301,12 @@ for (const s of funcionais) {
 
 // ---------------------------------------------------------------- regras extras
 // Complementam as regras do 002_dados_teste.sql. Férias e folgas ficam no
-// 003_regras_ferias_folgas.sql (não repetir códigos FER-/FOL- aqui).
+// 003_regras_ferias_folgas.sql; faltas, horas extras e luto/casamento no
+// 004_regras_faltas.sql (não repetir códigos FER-, FOL-, FRE-, HEX-, LIC-04/05 aqui).
 const regras = [
-  ["FRE-03", "Frequência", "Registro de ponto",
-   "A frequência é registrada diariamente. Esquecimentos ou erros de marcação devem ser justificados à chefia imediata no próprio mês.",
-   "Norma interna — a confirmar", "todos", ["ponto", "marcação", "esquecimento", "frequência"]],
-  ["FRE-04", "Frequência", "Atraso e saída antecipada",
-   "Atrasos e saídas antecipadas sem compensação autorizada podem gerar desconto proporcional na remuneração.",
-   "Estatuto (Lei Estadual nº 869/1952) — artigo a confirmar", "todos", ["atraso", "saída antecipada", "desconto"]],
-  ["HEX-02", "Horas extras", "Limite de horas extras",
-   "A realização de horas extras é excepcional e limitada pela legislação e por normas internas. Consulte a chefia antes de realizar plantões extras.",
-   "Norma interna — a confirmar", "todos", ["limite", "hora extra", "plantão extra"]],
   ["LIC-03", "Licenças", "Licença para tratamento de saúde",
    "Afastamentos por doença acima do limite definido em norma dependem de perícia médica oficial.",
    "Normas de perícia médica do Estado de MG — a confirmar", "todos", ["licença saúde", "perícia", "doença", "afastamento"]],
-  ["LIC-04", "Licenças", "Falecimento de familiar (nojo)",
-   "O servidor tem direito a dispensa por alguns dias consecutivos em caso de falecimento de familiar próximo.",
-   "Estatuto (Lei Estadual nº 869/1952) — prazo a confirmar", "todos", ["falecimento", "nojo", "luto", "família"]],
-  ["LIC-05", "Licenças", "Casamento (gala)",
-   "O servidor tem direito a dispensa por alguns dias consecutivos em razão de casamento.",
-   "Estatuto (Lei Estadual nº 869/1952) — prazo a confirmar", "todos", ["casamento", "gala", "dispensa"]],
   ["CAR-01", "Carreira", "Progressão e promoção",
    "Servidores efetivos avançam na carreira por progressão e promoção, conforme tempo de serviço, avaliação de desempenho e requisitos da carreira.",
    "Lei da carreira da saúde de MG — a confirmar", "efetivo", ["progressão", "promoção", "carreira", "avaliação"]],
