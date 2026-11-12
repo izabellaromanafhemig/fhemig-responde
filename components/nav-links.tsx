@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/", label: "Início" },
   { href: "/chat", label: "Chat com a IA" },
   { href: "/historico", label: "Histórico" },
+  { href: "/perguntas-frequentes", label: "Perguntas frequentes" },
 ];
 
 export function NavLinks() {

@@ -1,3 +1,4 @@
+import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { createClient } from "@/lib/supabase/server";
@@ -34,15 +35,16 @@ export async function AuthButton() {
   const saudacao = primeiroNome ? `Olá, ${primeiroNome}` : masp ? `MASP ${masp}` : null;
 
   return (
-    <div className="flex items-center gap-3">
-      {saudacao && (
-        <span
-          className="hidden text-muted-foreground sm:inline"
-          title={nome ?? undefined}
-        >
-          {saudacao}
-        </span>
-      )}
+    <div className="flex items-center gap-2">
+      <Link
+        href="/perfil"
+        title={nome ? `Meu perfil — ${nome}` : "Meu perfil"}
+        className="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+      >
+        <CircleUserRound className="h-5 w-5" aria-hidden />
+        <span className="hidden sm:inline">{saudacao ?? "Meu perfil"}</span>
+        <span className="sr-only sm:hidden">Meu perfil</span>
+      </Link>
       <LogoutButton />
     </div>
   );

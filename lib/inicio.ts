@@ -91,6 +91,21 @@ export function montarAlertas(d: DadosAlertas): Alerta[] {
   return alertas;
 }
 
+/** Tempo entre duas datas "AAAA-MM-DD" em anos e meses: "3 anos e 7 meses". */
+export function tempoDecorrido(inicio: string, hoje: string): string {
+  const [a1, m1, d1] = inicio.slice(0, 10).split("-").map(Number);
+  const [a2, m2, d2] = hoje.slice(0, 10).split("-").map(Number);
+  let meses = (a2 - a1) * 12 + (m2 - m1) - (d2 < d1 ? 1 : 0);
+  if (meses < 0) meses = 0;
+  const anos = Math.floor(meses / 12);
+  const resto = meses % 12;
+  const partes = [
+    anos > 0 ? plural(anos, "ano", "anos") : null,
+    resto > 0 ? plural(resto, "mês", "meses") : null,
+  ].filter(Boolean);
+  return partes.length ? partes.join(" e ") : "menos de 1 mês";
+}
+
 /** Link para o chat com a pergunta já preenchida. */
 export function linkChat(pergunta: string): string {
   return `/chat?pergunta=${encodeURIComponent(pergunta)}`;
