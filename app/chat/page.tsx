@@ -11,8 +11,7 @@ export default function ChatPage() {
       <div className="flex items-start gap-2 rounded-md border border-primary/30 bg-accent px-4 py-3 text-sm text-accent-foreground">
         <InfoIcon className="mt-0.5 h-4 w-4 shrink-0" />
         <p>
-          Assistente em desenvolvimento. Suas perguntas já ficam salvas no
-          histórico e serão respondidas quando o agente for conectado.
+          Assistente em desenvolvimento. O Fhemigo responde com base nas regras de RH e nos seus dados.
         </p>
       </div>
       <Suspense fallback={<div className="min-h-[60vh] flex-1 rounded-lg border" />}>

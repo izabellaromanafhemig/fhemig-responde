@@ -1,5 +1,6 @@
 "use client";
 
+import { AvaliacaoResposta } from "@/components/avaliacao-resposta";
 import { Mascote } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -147,6 +148,9 @@ export function ChatPanel() {
                   : (msg.resposta ?? msg.aviso)}
               </div>
             </div>
+            {msg.status === "respondida" && msg.resposta && (
+              <AvaliacaoResposta mensagemId={msg.id} className="ml-10" />
+            )}
           </div>
         ))}
         <div ref={fimRef} />

@@ -1,3 +1,4 @@
+import { AvaliacaoResposta } from "@/components/avaliacao-resposta";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,6 +32,8 @@ type Linha = {
   resposta: string | null;
   status: string;
   created_at: string;
+  avaliacao: 1 | -1 | null;
+  comentario_avaliacao: string | null;
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -46,7 +49,7 @@ async function Historico({ searchParams }: { searchParams: SearchParams }) {
   // RLS garante que só voltam as mensagens do próprio usuário
   let consulta = supabase
     .from("historico_mensagens")
-    .select("id, pergunta, resposta, status, created_at")
+    .select("id, pergunta, resposta, status, created_at, avaliacao, comentario_avaliacao")
     .order("created_at", { ascending: false })
     .limit(LIMITE_CONSULTA);
   if (filtros.inicioIso) consulta = consulta.gte("created_at", filtros.inicioIso);
@@ -66,7 +69,7 @@ async function Historico({ searchParams }: { searchParams: SearchParams }) {
         className="grid gap-3 rounded-lg border p-4 sm:grid-cols-[1fr_auto_auto_auto] sm:items-end"
       >
         <div className="grid gap-1.5">
-          <Label htmlFor="busca">Buscar palavras</Label>
+          <Label htmlFor="busca">Buscar</Label>
           <Input
             id="busca"
             name="busca"
@@ -99,7 +102,7 @@ async function Historico({ searchParams }: { searchParams: SearchParams }) {
       </form>
 
       {filtros.erro && (
-        <p className="text-sm text-amber-700 dark:text-amber-400">{filtros.erro}</p>
+        <p className="text-sm text-amber-600 dark:text-amber-400">{filtros.erro}</p>
       )}
 
       {error ? (
@@ -143,6 +146,14 @@ async function Historico({ searchParams }: { searchParams: SearchParams }) {
                 <p className="mt-2 text-sm whitespace-pre-wrap text-muted-foreground">
                   {l.resposta ?? "—"}
                 </p>
+                {l.status === "respondida" && l.resposta && (
+                  <AvaliacaoResposta
+                    mensagemId={l.id}
+                    avaliacaoInicial={l.avaliacao}
+                    comentarioInicial={l.comentario_avaliacao}
+                    className="mt-3 border-t pt-2"
+                  />
+                )}
               </li>
             ))}
           </ul>
