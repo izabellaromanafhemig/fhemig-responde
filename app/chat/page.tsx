@@ -7,7 +7,7 @@ export default function ChatPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-4 py-6">
       <h1 className="text-2xl font-bold">Chat com a IA</h1>
-      <div className="flex items-start gap-2 rounded-md bg-accent px-4 py-3 text-sm">
+      <div className="flex items-start gap-2 rounded-md border border-primary/30 bg-accent px-4 py-3 text-sm text-accent-foreground">
         <InfoIcon className="mt-0.5 h-4 w-4 shrink-0" />
         <p>
           Assistente em desenvolvimento. Suas perguntas já ficam salvas no

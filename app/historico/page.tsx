@@ -99,7 +99,7 @@ async function Historico({ searchParams }: { searchParams: SearchParams }) {
       </form>
 
       {filtros.erro && (
-        <p className="text-sm text-amber-600 dark:text-amber-400">{filtros.erro}</p>
+        <p className="text-sm text-amber-700 dark:text-amber-400">{filtros.erro}</p>
       )}
 
       {error ? (

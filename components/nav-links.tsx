@@ -23,8 +23,10 @@ export function NavLinks() {
               href={href}
               aria-current={ativo ? "page" : undefined}
               className={cn(
-                "block rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors hover:bg-accent",
-                ativo ? "bg-accent font-semibold text-foreground" : "text-muted-foreground",
+                "block rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors hover:bg-accent hover:text-accent-foreground",
+                ativo
+                  ? "bg-accent font-semibold text-accent-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {label}

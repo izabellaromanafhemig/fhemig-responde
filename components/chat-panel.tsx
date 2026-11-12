@@ -1,5 +1,6 @@
 "use client";
 
+import { Mascote } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SendHorizonal } from "lucide-react";
@@ -103,27 +104,37 @@ export function ChatPanel() {
         aria-live="polite"
       >
         {mensagens.length === 0 && (
-          <p className="m-auto max-w-sm text-center text-sm text-muted-foreground">
-            Exemplo: &quot;Quantos dias de férias ainda tenho em 2026?&quot;
-          </p>
+          <div className="m-auto flex max-w-sm flex-col items-center gap-3 text-center">
+            <Mascote size={120} />
+            <p className="font-semibold text-brand-strong">
+              Olá! Eu sou o Fhemigo.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Pergunte, por exemplo: &quot;Quantos dias de férias ainda tenho
+              em 2026?&quot;
+            </p>
+          </div>
         )}
 
         {mensagens.map((msg) => (
           <div key={msg.id} className="flex flex-col gap-2">
-            <div className="max-w-[85%] self-end rounded-lg bg-primary px-3 py-2 text-sm whitespace-pre-wrap text-primary-foreground">
+            <div className="max-w-[85%] self-end rounded-2xl rounded-br-sm bg-primary px-3 py-2 text-sm whitespace-pre-wrap text-primary-foreground">
               {msg.pergunta}
             </div>
-            <div
-              className={cn(
-                "max-w-[85%] self-start rounded-lg px-3 py-2 text-sm whitespace-pre-wrap",
-                msg.status === "erro"
-                  ? "bg-destructive/10 text-destructive"
-                  : "bg-muted",
-              )}
-            >
-              {msg.status === "enviando"
-                ? "Enviando..."
-                : (msg.resposta ?? msg.aviso)}
+            <div className="flex max-w-[90%] items-end gap-2 self-start">
+              <Mascote size={32} alt="Fhemigo" />
+              <div
+                className={cn(
+                  "rounded-2xl rounded-bl-sm px-3 py-2 text-sm whitespace-pre-wrap",
+                  msg.status === "erro"
+                    ? "bg-destructive/10 text-destructive"
+                    : "bg-secondary text-secondary-foreground",
+                )}
+              >
+                {msg.status === "enviando"
+                  ? "Fhemigo está pensando..."
+                  : (msg.resposta ?? msg.aviso)}
+              </div>
             </div>
           </div>
         ))}
