@@ -1,5 +1,6 @@
 import { ChatPanel } from "@/components/chat-panel";
 import { InfoIcon } from "lucide-react";
+import { Suspense } from "react";
 
 export const metadata = { title: "Chat com a IA | Fhemigo Responde" };
 
@@ -14,7 +15,9 @@ export default function ChatPage() {
           histórico e serão respondidas quando o agente for conectado.
         </p>
       </div>
-      <ChatPanel />
+      <Suspense fallback={<div className="min-h-[60vh] flex-1 rounded-lg border" />}>
+        <ChatPanel />
+      </Suspense>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Mascote } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SendHorizonal } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 type Mensagem = {
@@ -16,10 +17,20 @@ type Mensagem = {
 
 export function ChatPanel() {
   const [mensagens, setMensagens] = useState<Mensagem[]>([]);
-  const [texto, setTexto] = useState("");
+  // Pergunta vinda da página de início (/chat?pergunta=...) já preenchida
+  const perguntaInicial = (useSearchParams().get("pergunta") ?? "").slice(0, 4000);
+  const [texto, setTexto] = useState(perguntaInicial);
   const [conversaId, setConversaId] = useState<string | undefined>();
   const [enviando, setEnviando] = useState(false);
   const fimRef = useRef<HTMLDivElement>(null);
+  const campoRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!perguntaInicial) return;
+    campoRef.current?.focus();
+    // remove a pergunta da URL para não voltar ao recarregar a página
+    window.history.replaceState(null, "", "/chat");
+  }, [perguntaInicial]);
 
   useEffect(() => {
     fimRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -147,6 +158,7 @@ export function ChatPanel() {
         </label>
         <textarea
           id="pergunta"
+          ref={campoRef}
           rows={2}
           maxLength={4000}
           value={texto}
