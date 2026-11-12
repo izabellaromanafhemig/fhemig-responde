@@ -22,13 +22,25 @@ export async function AuthButton() {
     );
   }
 
+  // RLS: só volta a linha do próprio servidor
+  const { data: cadastro } = await supabase
+    .from("dados_funcionais")
+    .select("nome")
+    .maybeSingle();
+
+  const nome = (cadastro?.nome as string | undefined)?.trim();
+  const primeiroNome = nome?.split(/\s+/)[0];
   const masp = maspDoEmail(user.email as string | undefined);
+  const saudacao = primeiroNome ? `Olá, ${primeiroNome}` : masp ? `MASP ${masp}` : null;
 
   return (
     <div className="flex items-center gap-3">
-      {masp && (
-        <span className="hidden text-muted-foreground sm:inline">
-          MASP {masp}
+      {saudacao && (
+        <span
+          className="hidden text-muted-foreground sm:inline"
+          title={nome ?? undefined}
+        >
+          {saudacao}
         </span>
       )}
       <LogoutButton />
