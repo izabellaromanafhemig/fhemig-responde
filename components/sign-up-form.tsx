@@ -2,6 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import {
+  maspParaEmail,
+  maspValido,
+  mensagemErroAuth,
+  normalizarMasp,
+} from "@/lib/masp";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,7 +26,7 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
+  const [masp, setMasp] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -29,28 +35,36 @@ export function SignUpForm({
 
   const handleSignUp = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
     setError(null);
 
+    const maspLimpo = normalizarMasp(masp);
+    if (!maspValido(maspLimpo)) {
+      setError("Informe um MASP válido (somente números).");
+      return;
+    }
+    if (password.length < 8) {
+      setError("A senha deve ter pelo menos 8 caracteres.");
+      return;
+    }
     if (password !== repeatPassword) {
-      setError("Passwords do not match");
-      setIsLoading(false);
+      setError("As senhas não conferem.");
       return;
     }
 
+    const supabase = createClient();
+    setIsLoading(true);
     try {
       const { error } = await supabase.auth.signUp({
-        email,
+        email: maspParaEmail(maspLimpo),
         password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
-        },
+        // O trigger handle_new_user usa este MASP para criar o perfil
+        options: { data: { masp: maspLimpo } },
       });
       if (error) throw error;
       router.push("/auth/sign-up-success");
+      router.refresh();
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(mensagemErroAuth(error, "cadastro"));
     } finally {
       setIsLoading(false);
     }
@@ -60,42 +74,43 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Sign up</CardTitle>
-          <CardDescription>Create a new account</CardDescription>
+          <CardTitle className="text-2xl">Cadastro</CardTitle>
+          <CardDescription>
+            Crie seu acesso usando o seu MASP
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="masp">MASP</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
+                  id="masp"
+                  inputMode="numeric"
+                  autoComplete="username"
+                  placeholder="Ex.: 12345678"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={masp}
+                  onChange={(e) => setMasp(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
+                <Label htmlFor="password">Senha</Label>
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="new-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="repeat-password">Repeat Password</Label>
-                </div>
+                <Label htmlFor="repeat-password">Repita a senha</Label>
                 <Input
                   id="repeat-password"
                   type="password"
+                  autoComplete="new-password"
                   required
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
@@ -103,13 +118,13 @@ export function SignUpForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating an account..." : "Sign up"}
+                {isLoading ? "Cadastrando..." : "Cadastrar"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Already have an account?{" "}
+              Já tem cadastro?{" "}
               <Link href="/auth/login" className="underline underline-offset-4">
-                Login
+                Entrar
               </Link>
             </div>
           </form>

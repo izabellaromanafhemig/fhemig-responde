@@ -2,6 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import {
+  maspParaEmail,
+  maspValido,
+  mensagemErroAuth,
+  normalizarMasp,
+} from "@/lib/masp";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,7 +26,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
+  const [masp, setMasp] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,20 +34,26 @@ export function LoginForm({
 
   const handleLogin = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
     setError(null);
 
+    const maspLimpo = normalizarMasp(masp);
+    if (!maspValido(maspLimpo)) {
+      setError("Informe um MASP válido (somente números).");
+      return;
+    }
+
+    const supabase = createClient();
+    setIsLoading(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: maspParaEmail(maspLimpo),
         password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/protected");
+      router.push("/");
+      router.refresh();
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(mensagemErroAuth(error, "login"));
     } finally {
       setIsLoading(false);
     }
@@ -51,38 +63,40 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Entrar</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Use seu MASP e sua senha do Fhemigo Responde
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="masp">MASP</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
+                  id="masp"
+                  inputMode="numeric"
+                  autoComplete="username"
+                  placeholder="Ex.: 12345678"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={masp}
+                  onChange={(e) => setMasp(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Senha</Label>
                   <Link
                     href="/auth/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    Esqueceu a senha?
                   </Link>
                 </div>
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -90,16 +104,16 @@ export function LoginForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? "Entrando..." : "Entrar"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+              Ainda não tem cadastro?{" "}
               <Link
                 href="/auth/sign-up"
                 className="underline underline-offset-4"
               >
-                Sign up
+                Cadastre-se
               </Link>
             </div>
           </form>
