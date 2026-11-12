@@ -52,10 +52,10 @@ values
 -- 3. Férias: direito anual + períodos
 -- -----------------------------------------------------------------------------
 insert into public.dados_ferias (masp, ano_referencia, dias_direito) values
-  ('90000011', 2026, 30),
+  ('90000011', 2026, 25),
   ('90000029', 2026, 25),
   ('90000037', 2026, 25),
-  ('90000045', 2026, 30),
+  ('90000045', 2026, 25),
   ('90000053', 2026, 25);
 
 insert into public.dados_ferias_periodos
@@ -63,9 +63,9 @@ insert into public.dados_ferias_periodos
 values
   -- Regras: no máximo 2 períodos de pelo menos 10 dias úteis, começando
   -- dentro do ano; feriados nacionais não contam (ver 003).
-  -- João (contrato, 30 dias corridos): tirou 15, tem 15 programados em dezembro
-  ('90000011', 2026, '2026-07-06', '2026-07-20', 15, 'gozada'),
-  ('90000011', 2026, '2026-12-07', '2026-12-21', 15, 'programada'),
+  -- João (contrato, 25 dias úteis como os efetivos): tirou 15, tem 10 programados
+  ('90000011', 2026, '2026-07-06', '2026-07-24', 15, 'gozada'),
+  ('90000011', 2026, '2026-12-07', '2026-12-18', 10, 'programada'),
   -- Ana: tirou 10 dias úteis, programou 15 (25/12 é feriado e não conta)
   ('90000029', 2026, '2026-04-06', '2026-04-17', 10, 'gozada'),
   ('90000029', 2026, '2026-12-07', '2026-12-28', 15, 'programada'),

@@ -1,145 +1,160 @@
 masp,tipo,dias,origem,data_referencia,validade,descricao
-91000011,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000011,debito,1.00,gozo,2026-11-23,,Folga agendada
-91000011,credito,2.00,outros,2026-07-29,2027-01-25,Compensação autorizada pela chefia
-91000011,credito,1.00,outros,2026-06-25,2026-12-22,Compensação autorizada pela chefia
-91000011,credito,1.00,plantao_feriado,2026-01-14,2026-07-13,Plantão em feriado
-91000011,debito,1.00,gozo,2026-01-22,,Folga usufruída
-91000023,credito,1.00,outros,2026-06-12,2026-12-09,Compensação autorizada pela chefia
-91000034,credito,1.00,horas_extras,2026-05-19,2026-11-15,Conversão de horas extras autorizadas em folga
-91000034,debito,1.00,gozo,2026-06-16,,Folga usufruída
-91000034,credito,1.00,plantao_feriado,2026-04-21,2026-10-18,Plantão em feriado
-91000034,debito,1.00,gozo,2026-06-15,,Folga usufruída
-91000035,credito,1.00,horas_extras,2026-05-08,2026-11-04,Conversão de horas extras autorizadas em folga
-91000035,debito,1.00,gozo,2026-07-03,,Folga usufruída
-91000043,credito,1.00,plantao_feriado,2026-10-12,2027-04-10,Plantão em feriado
-91000043,credito,2.00,outros,2026-08-18,2027-02-14,Compensação autorizada pela chefia
-91000052,credito,1.00,plantao_feriado,2026-09-01,2027-02-28,Plantão em feriado
-91000052,debito,1.00,gozo,2026-10-14,,Folga usufruída
-91000052,credito,1.00,horas_extras,2026-06-16,2026-12-13,Conversão de horas extras autorizadas em folga
-91000064,credito,1.00,plantao_feriado,2026-03-05,2026-09-01,Plantão em feriado
-91000064,debito,1.00,gozo,2026-03-30,,Folga usufruída
-91000064,credito,1.00,plantao_feriado,2026-05-25,2026-11-21,Plantão em feriado
-91000064,credito,1.00,horas_extras,2026-07-03,2026-12-30,Conversão de horas extras autorizadas em folga
-91000064,debito,1.00,gozo,2026-08-31,,Folga usufruída
-91000075,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000075,credito,1.00,plantao_feriado,2026-05-23,2026-11-19,Plantão em feriado
-91000075,credito,2.00,plantao_feriado,2026-02-03,2026-08-02,Plantão em feriado
-91000075,debito,1.00,gozo,2026-04-06,,Folga usufruída
-91000081,credito,1.00,outros,2026-10-19,2027-04-17,Compensação autorizada pela chefia
-91000085,credito,1.00,plantao_feriado,2026-09-18,2027-03-17,Plantão em feriado
-91000085,debito,1.00,gozo,2026-10-14,,Folga usufruída
-91000107,credito,1.00,outros,2026-07-23,2027-01-19,Compensação autorizada pela chefia
-91000107,debito,1.00,gozo,2026-08-19,,Folga usufruída
-91000107,credito,1.00,plantao_feriado,2026-01-18,2026-07-17,Plantão em feriado
-91000107,debito,1.00,gozo,2026-03-10,,Folga usufruída
-91000107,credito,1.00,horas_extras,2026-09-02,2027-03-01,Conversão de horas extras autorizadas em folga
-91000107,debito,1.00,gozo,2026-09-28,,Folga usufruída
-91000107,credito,1.00,plantao_feriado,2026-05-27,2026-11-23,Plantão em feriado
-91000107,debito,1.00,gozo,2026-07-20,,Folga usufruída
-91000132,credito,1.00,outros,2026-01-28,2026-07-27,Compensação autorizada pela chefia
-91000132,debito,1.00,gozo,2026-03-25,,Folga usufruída
-91000132,credito,2.00,plantao_feriado,2026-06-11,2026-12-08,Plantão em feriado
-91000132,credito,1.00,plantao_feriado,2026-06-05,2026-12-02,Plantão em feriado
-91000132,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000132,debito,1.00,gozo,2026-11-03,,Folga usufruída
-91000164,credito,1.00,plantao_feriado,2026-10-04,2027-04-02,Plantão em feriado
-91000164,debito,1.00,gozo,2026-10-20,,Folga usufruída
-91000164,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000164,debito,1.00,gozo,2026-10-15,,Folga usufruída
-91000164,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000164,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000164,debito,1.00,gozo,2026-10-26,,Folga usufruída
-91000176,credito,1.00,plantao_feriado,2025-12-16,2026-06-14,Plantão em feriado
-91000176,debito,1.00,gozo,2026-01-26,,Folga usufruída
-91000176,credito,1.00,horas_extras,2026-07-27,2027-01-23,Conversão de horas extras autorizadas em folga
-91000176,debito,1.00,gozo,2026-08-20,,Folga usufruída
-91000184,credito,1.00,horas_extras,2026-05-21,2026-11-17,Conversão de horas extras autorizadas em folga
-91000184,debito,1.00,gozo,2026-06-16,,Folga usufruída
-91000184,credito,1.00,horas_extras,2025-12-14,2026-06-12,Conversão de horas extras autorizadas em folga
-91000184,credito,1.00,plantao_feriado,2026-10-14,2027-04-12,Plantão em feriado
-91000184,debito,1.00,gozo,2026-11-03,,Folga usufruída
-91000191,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000196,credito,1.00,plantao_feriado,2026-02-28,2026-08-27,Plantão em feriado
-91000196,credito,1.00,plantao_feriado,2026-08-17,2027-02-13,Plantão em feriado
-91000196,debito,1.00,gozo,2026-09-11,,Folga usufruída
-91000196,credito,1.00,plantao_feriado,2026-02-10,2026-08-09,Plantão em feriado
-91000196,debito,1.00,gozo,2026-03-02,,Folga usufruída
-91000204,credito,1.00,horas_extras,2026-10-29,2027-04-27,Conversão de horas extras autorizadas em folga
-91000204,debito,1.00,gozo,2026-11-09,,Folga usufruída
-91000215,credito,1.00,plantao_feriado,2026-05-16,2026-11-12,Plantão em feriado
-91000215,debito,1.00,gozo,2026-05-29,,Folga usufruída
-91000215,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000236,credito,1.00,outros,2026-07-27,2027-01-23,Compensação autorizada pela chefia
-91000236,debito,1.00,gozo,2026-08-17,,Folga usufruída
-91000236,credito,2.00,plantao_feriado,2026-02-28,2026-08-27,Plantão em feriado
-91000236,debito,1.00,gozo,2026-03-23,,Folga usufruída
-91000236,credito,1.00,horas_extras,2026-10-05,2027-04-03,Conversão de horas extras autorizadas em folga
-91000236,debito,1.00,gozo,2026-10-28,,Folga usufruída
-91000236,credito,2.00,outros,2026-03-29,2026-09-25,Compensação autorizada pela chefia
-91000236,debito,1.00,gozo,2026-05-25,,Folga usufruída
-91000241,credito,1.00,horas_extras,2026-03-06,2026-09-02,Conversão de horas extras autorizadas em folga
-91000241,debito,1.00,gozo,2026-04-09,,Folga usufruída
-91000241,credito,1.00,horas_extras,2026-01-20,2026-07-19,Conversão de horas extras autorizadas em folga
-91000241,debito,1.00,gozo,2026-02-16,,Folga usufruída
-91000241,credito,1.00,plantao_feriado,2026-09-03,2027-03-02,Plantão em feriado
-91000241,debito,1.00,gozo,2026-10-01,,Folga usufruída
-91000241,credito,1.00,horas_extras,2026-04-26,2026-10-23,Conversão de horas extras autorizadas em folga
-91000249,credito,2.00,outros,2026-07-03,2026-12-30,Compensação autorizada pela chefia
-91000269,credito,2.00,plantao_feriado,2026-07-28,2027-01-24,Plantão em feriado
-91000286,credito,1.00,outros,2026-04-16,2026-10-13,Compensação autorizada pela chefia
-91000286,credito,2.00,outros,2025-12-17,2026-06-15,Compensação autorizada pela chefia
-91000291,credito,2.00,plantao_feriado,2026-05-21,2026-11-17,Plantão em feriado
-91000291,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000291,debito,1.00,gozo,2026-12-02,,Folga agendada
-91000299,credito,1.00,outros,2026-10-27,2027-04-25,Compensação autorizada pela chefia
-91000299,debito,1.00,gozo,2026-12-04,,Folga agendada
-91000299,credito,1.00,outros,2026-07-11,2027-01-07,Compensação autorizada pela chefia
-91000299,debito,1.00,gozo,2026-08-10,,Folga usufruída
-91000309,credito,1.00,horas_extras,2026-06-27,2026-12-24,Conversão de horas extras autorizadas em folga
-91000309,debito,1.00,gozo,2026-07-13,,Folga usufruída
-91000328,credito,2.00,horas_extras,2026-08-12,2027-02-08,Conversão de horas extras autorizadas em folga
-91000328,debito,1.00,gozo,2026-09-02,,Folga usufruída
-91000332,credito,2.00,horas_extras,2026-08-08,2027-02-04,Conversão de horas extras autorizadas em folga
-91000332,debito,1.00,gozo,2026-09-09,,Folga usufruída
-91000332,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000332,debito,1.00,gozo,2026-10-26,,Folga usufruída
-91000348,credito,1.00,horas_extras,2026-04-13,2026-10-10,Conversão de horas extras autorizadas em folga
-91000348,credito,2.00,outros,2026-04-09,2026-10-06,Compensação autorizada pela chefia
-91000348,debito,1.00,gozo,2026-06-03,,Folga usufruída
-91000351,credito,1.00,plantao_feriado,2026-04-20,2026-10-17,Plantão em feriado
-91000351,credito,1.00,outros,2026-05-26,2026-11-22,Compensação autorizada pela chefia
+91000011,credito,1.00,plantao_feriado,2026-01-22,2026-07-21,Plantão em feriado
+91000011,debito,1.00,gozo,2026-03-02,,Folga usufruída
+91000011,credito,2.00,plantao_feriado,2026-08-05,2027-02-01,Plantão em feriado
+91000011,credito,1.00,plantao_feriado,2025-12-26,2026-06-24,Plantão em feriado
+91000011,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000014,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000014,debito,1.00,gozo,2026-11-09,,Folga usufruída
+91000014,credito,1.00,plantao_feriado,2026-02-04,2026-08-03,Plantão em feriado
+91000014,debito,1.00,gozo,2026-03-23,,Folga usufruída
+91000014,credito,1.00,horas_extras,2026-09-08,2027-03-07,Conversão de horas extras autorizadas em folga
+91000023,credito,1.00,plantao_feriado,2026-01-07,2026-07-06,Plantão em feriado
+91000023,debito,1.00,gozo,2026-02-09,,Folga usufruída
+91000023,credito,1.00,plantao_feriado,2026-04-19,2026-10-16,Plantão em feriado
+91000023,debito,1.00,gozo,2026-05-11,,Folga usufruída
+91000023,credito,1.00,outros,2026-04-17,2026-10-14,Compensação autorizada pela chefia
+91000023,debito,1.00,gozo,2026-05-19,,Folga usufruída
+91000023,credito,2.00,plantao_feriado,2026-05-20,2026-11-16,Plantão em feriado
+91000034,credito,2.00,outros,2026-05-01,2026-10-28,Compensação autorizada pela chefia
+91000034,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000035,credito,1.00,plantao_feriado,2026-09-01,2027-02-28,Plantão em feriado
+91000035,debito,1.00,gozo,2026-10-14,,Folga usufruída
+91000035,credito,1.00,horas_extras,2026-06-16,2026-12-13,Conversão de horas extras autorizadas em folga
+91000052,credito,1.00,plantao_feriado,2026-03-05,2026-09-01,Plantão em feriado
+91000052,debito,1.00,gozo,2026-03-30,,Folga usufruída
+91000052,credito,1.00,plantao_feriado,2026-05-25,2026-11-21,Plantão em feriado
+91000052,credito,1.00,horas_extras,2026-07-03,2026-12-30,Conversão de horas extras autorizadas em folga
+91000052,debito,1.00,gozo,2026-08-31,,Folga usufruída
+91000062,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000062,credito,1.00,plantao_feriado,2026-05-23,2026-11-19,Plantão em feriado
+91000062,credito,2.00,plantao_feriado,2026-02-03,2026-08-02,Plantão em feriado
+91000062,debito,1.00,gozo,2026-04-06,,Folga usufruída
+91000064,credito,1.00,outros,2026-10-19,2027-04-17,Compensação autorizada pela chefia
+91000075,credito,1.00,plantao_feriado,2026-09-18,2027-03-17,Plantão em feriado
+91000075,debito,1.00,gozo,2026-10-14,,Folga usufruída
+91000094,credito,1.00,outros,2026-07-23,2027-01-19,Compensação autorizada pela chefia
+91000094,debito,1.00,gozo,2026-08-19,,Folga usufruída
+91000094,credito,1.00,plantao_feriado,2026-01-18,2026-07-17,Plantão em feriado
+91000094,debito,1.00,gozo,2026-03-10,,Folga usufruída
+91000094,credito,1.00,horas_extras,2026-09-02,2027-03-01,Conversão de horas extras autorizadas em folga
+91000094,debito,1.00,gozo,2026-09-28,,Folga usufruída
+91000094,credito,1.00,plantao_feriado,2026-05-27,2026-11-23,Plantão em feriado
+91000094,debito,1.00,gozo,2026-07-20,,Folga usufruída
+91000116,credito,1.00,outros,2026-01-28,2026-07-27,Compensação autorizada pela chefia
+91000116,debito,1.00,gozo,2026-03-25,,Folga usufruída
+91000116,credito,2.00,plantao_feriado,2026-06-11,2026-12-08,Plantão em feriado
+91000116,credito,1.00,plantao_feriado,2026-06-05,2026-12-02,Plantão em feriado
+91000116,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000116,debito,1.00,gozo,2026-11-03,,Folga usufruída
+91000151,credito,1.00,plantao_feriado,2026-10-04,2027-04-02,Plantão em feriado
+91000151,debito,1.00,gozo,2026-10-20,,Folga usufruída
+91000151,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000151,debito,1.00,gozo,2026-10-15,,Folga usufruída
+91000151,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000151,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000151,debito,1.00,gozo,2026-10-26,,Folga usufruída
+91000164,credito,1.00,plantao_feriado,2025-12-16,2026-06-14,Plantão em feriado
+91000164,debito,1.00,gozo,2026-01-26,,Folga usufruída
+91000164,credito,1.00,horas_extras,2026-07-27,2027-01-23,Conversão de horas extras autorizadas em folga
+91000164,debito,1.00,gozo,2026-08-20,,Folga usufruída
+91000168,credito,1.00,horas_extras,2026-05-21,2026-11-17,Conversão de horas extras autorizadas em folga
+91000168,debito,1.00,gozo,2026-06-16,,Folga usufruída
+91000168,credito,1.00,horas_extras,2025-12-14,2026-06-12,Conversão de horas extras autorizadas em folga
+91000168,credito,1.00,plantao_feriado,2026-10-14,2027-04-12,Plantão em feriado
+91000168,debito,1.00,gozo,2026-11-03,,Folga usufruída
+91000176,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000184,credito,1.00,plantao_feriado,2026-02-28,2026-08-27,Plantão em feriado
+91000184,credito,1.00,plantao_feriado,2026-08-17,2027-02-13,Plantão em feriado
+91000184,debito,1.00,gozo,2026-09-11,,Folga usufruída
+91000184,credito,1.00,plantao_feriado,2026-02-10,2026-08-09,Plantão em feriado
+91000184,debito,1.00,gozo,2026-03-02,,Folga usufruída
+91000191,credito,1.00,horas_extras,2026-10-29,2027-04-27,Conversão de horas extras autorizadas em folga
+91000191,debito,1.00,gozo,2026-11-09,,Folga usufruída
+91000196,credito,1.00,plantao_feriado,2026-05-16,2026-11-12,Plantão em feriado
+91000196,debito,1.00,gozo,2026-05-29,,Folga usufruída
+91000196,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000218,credito,1.00,outros,2026-07-27,2027-01-23,Compensação autorizada pela chefia
+91000218,debito,1.00,gozo,2026-08-17,,Folga usufruída
+91000218,credito,2.00,plantao_feriado,2026-02-28,2026-08-27,Plantão em feriado
+91000218,debito,1.00,gozo,2026-03-23,,Folga usufruída
+91000218,credito,1.00,horas_extras,2026-10-05,2027-04-03,Conversão de horas extras autorizadas em folga
+91000218,debito,1.00,gozo,2026-10-28,,Folga usufruída
+91000218,credito,2.00,outros,2026-03-29,2026-09-25,Compensação autorizada pela chefia
+91000218,debito,1.00,gozo,2026-05-25,,Folga usufruída
+91000229,credito,1.00,horas_extras,2026-03-06,2026-09-02,Conversão de horas extras autorizadas em folga
+91000229,debito,1.00,gozo,2026-04-09,,Folga usufruída
+91000229,credito,1.00,horas_extras,2026-01-20,2026-07-19,Conversão de horas extras autorizadas em folga
+91000229,debito,1.00,gozo,2026-02-16,,Folga usufruída
+91000229,credito,1.00,plantao_feriado,2026-09-03,2027-03-02,Plantão em feriado
+91000229,debito,1.00,gozo,2026-10-01,,Folga usufruída
+91000229,credito,1.00,horas_extras,2026-04-26,2026-10-23,Conversão de horas extras autorizadas em folga
+91000236,credito,2.00,outros,2026-07-03,2026-12-30,Compensação autorizada pela chefia
+91000252,credito,2.00,plantao_feriado,2026-07-28,2027-01-24,Plantão em feriado
+91000269,credito,1.00,outros,2026-04-16,2026-10-13,Compensação autorizada pela chefia
+91000269,credito,2.00,outros,2025-12-17,2026-06-15,Compensação autorizada pela chefia
+91000273,credito,2.00,plantao_feriado,2026-05-21,2026-11-17,Plantão em feriado
+91000273,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000273,debito,1.00,gozo,2026-12-02,,Folga agendada
+91000286,credito,1.00,outros,2026-10-27,2027-04-25,Compensação autorizada pela chefia
+91000286,debito,1.00,gozo,2026-12-04,,Folga agendada
+91000286,credito,1.00,outros,2026-07-11,2027-01-07,Compensação autorizada pela chefia
+91000286,debito,1.00,gozo,2026-08-10,,Folga usufruída
+91000299,credito,1.00,horas_extras,2026-06-27,2026-12-24,Conversão de horas extras autorizadas em folga
+91000299,debito,1.00,gozo,2026-07-13,,Folga usufruída
+91000309,credito,2.00,horas_extras,2026-08-12,2027-02-08,Conversão de horas extras autorizadas em folga
+91000309,debito,1.00,gozo,2026-09-02,,Folga usufruída
+91000318,credito,2.00,horas_extras,2026-08-08,2027-02-04,Conversão de horas extras autorizadas em folga
+91000318,debito,1.00,gozo,2026-09-09,,Folga usufruída
+91000318,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000318,debito,1.00,gozo,2026-10-26,,Folga usufruída
+91000332,credito,1.00,horas_extras,2026-04-13,2026-10-10,Conversão de horas extras autorizadas em folga
+91000332,credito,2.00,outros,2026-04-09,2026-10-06,Compensação autorizada pela chefia
+91000332,debito,1.00,gozo,2026-06-03,,Folga usufruída
+91000337,credito,1.00,plantao_feriado,2026-04-20,2026-10-17,Plantão em feriado
+91000337,credito,1.00,outros,2026-05-26,2026-11-22,Compensação autorizada pela chefia
+91000337,debito,1.00,gozo,2026-07-13,,Folga usufruída
+91000337,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000348,credito,1.00,outros,2026-07-24,2027-01-20,Compensação autorizada pela chefia
+91000351,credito,1.00,plantao_feriado,2026-08-01,2027-01-28,Plantão em feriado
+91000351,debito,1.00,gozo,2026-08-26,,Folga usufruída
+91000351,credito,2.00,outros,2026-10-06,2027-04-04,Compensação autorizada pela chefia
+91000351,credito,1.00,plantao_feriado,2026-08-06,2027-02-02,Plantão em feriado
+91000351,debito,1.00,gozo,2026-09-16,,Folga usufruída
+91000351,credito,1.00,plantao_feriado,2026-06-02,2026-11-29,Plantão em feriado
 91000351,debito,1.00,gozo,2026-07-13,,Folga usufruída
-91000351,credito,2.00,servico_eleitoral,2026-10-25,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000360,credito,1.00,outros,2026-07-24,2027-01-20,Compensação autorizada pela chefia
-91000366,credito,1.00,plantao_feriado,2026-08-01,2027-01-28,Plantão em feriado
-91000366,debito,1.00,gozo,2026-08-26,,Folga usufruída
-91000366,credito,2.00,outros,2026-10-06,2027-04-04,Compensação autorizada pela chefia
-91000366,credito,1.00,plantao_feriado,2026-08-06,2027-02-02,Plantão em feriado
-91000366,debito,1.00,gozo,2026-09-16,,Folga usufruída
-91000366,credito,1.00,plantao_feriado,2026-06-02,2026-11-29,Plantão em feriado
-91000366,debito,1.00,gozo,2026-07-13,,Folga usufruída
-91000375,credito,2.00,outros,2026-01-22,2026-07-21,Compensação autorizada pela chefia
-91000375,credito,1.00,outros,2026-10-20,2027-04-18,Compensação autorizada pela chefia
-91000375,debito,1.00,gozo,2026-10-27,,Folga usufruída
-91000375,credito,1.00,horas_extras,2026-05-18,2026-11-14,Conversão de horas extras autorizadas em folga
-91000375,debito,1.00,gozo,2026-06-08,,Folga usufruída
-91000388,credito,1.00,horas_extras,2026-05-29,2026-11-25,Conversão de horas extras autorizadas em folga
-91000388,debito,1.00,gozo,2026-07-16,,Folga usufruída
-91000388,credito,1.00,outros,2026-08-08,2027-02-04,Compensação autorizada pela chefia
-91000395,credito,1.00,horas_extras,2026-02-15,2026-08-14,Conversão de horas extras autorizadas em folga
-91000395,debito,1.00,gozo,2026-04-15,,Folga usufruída
-91000395,credito,1.00,plantao_feriado,2026-05-14,2026-11-10,Plantão em feriado
-91000395,debito,1.00,gozo,2026-07-03,,Folga usufruída
-91000395,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
-91000395,debito,1.00,gozo,2026-11-24,,Folga agendada
-91000395,credito,2.00,outros,2026-04-12,2026-10-09,Compensação autorizada pela chefia
-91000395,debito,1.00,gozo,2026-06-02,,Folga usufruída
-91000406,credito,1.00,plantao_feriado,2026-03-11,2026-09-07,Plantão em feriado
-91000406,debito,1.00,gozo,2026-04-13,,Folga usufruída
-91000406,credito,2.00,horas_extras,2026-05-23,2026-11-19,Conversão de horas extras autorizadas em folga
-91000406,debito,1.00,gozo,2026-06-12,,Folga usufruída
-91000421,credito,2.00,plantao_feriado,2026-09-27,2027-03-26,Plantão em feriado
-91000421,credito,1.00,plantao_feriado,2026-09-10,2027-03-09,Plantão em feriado
-91000421,credito,2.00,horas_extras,2026-10-20,2027-04-18,Conversão de horas extras autorizadas em folga
-91000421,debito,1.00,gozo,2026-11-16,,Folga agendada
+91000360,credito,2.00,outros,2026-01-22,2026-07-21,Compensação autorizada pela chefia
+91000360,credito,1.00,outros,2026-10-20,2027-04-18,Compensação autorizada pela chefia
+91000360,debito,1.00,gozo,2026-10-27,,Folga usufruída
+91000360,credito,1.00,horas_extras,2026-05-18,2026-11-14,Conversão de horas extras autorizadas em folga
+91000360,debito,1.00,gozo,2026-06-08,,Folga usufruída
+91000375,credito,1.00,horas_extras,2026-05-29,2026-11-25,Conversão de horas extras autorizadas em folga
+91000375,debito,1.00,gozo,2026-07-16,,Folga usufruída
+91000375,credito,1.00,outros,2026-08-08,2027-02-04,Compensação autorizada pela chefia
+91000382,credito,1.00,horas_extras,2026-02-15,2026-08-14,Conversão de horas extras autorizadas em folga
+91000382,debito,1.00,gozo,2026-04-15,,Folga usufruída
+91000382,credito,1.00,plantao_feriado,2026-05-14,2026-11-10,Plantão em feriado
+91000382,debito,1.00,gozo,2026-07-03,,Folga usufruída
+91000382,credito,2.00,servico_eleitoral,2026-10-04,,Convocação pela Justiça Eleitoral (dispensa em dobro)
+91000382,debito,1.00,gozo,2026-11-24,,Folga agendada
+91000382,credito,2.00,outros,2026-04-12,2026-10-09,Compensação autorizada pela chefia
+91000382,debito,1.00,gozo,2026-06-02,,Folga usufruída
+91000395,credito,1.00,plantao_feriado,2026-03-11,2026-09-07,Plantão em feriado
+91000395,debito,1.00,gozo,2026-04-13,,Folga usufruída
+91000395,credito,2.00,horas_extras,2026-05-23,2026-11-19,Conversão de horas extras autorizadas em folga
+91000395,debito,1.00,gozo,2026-06-12,,Folga usufruída
+91000406,credito,2.00,plantao_feriado,2026-09-27,2027-03-26,Plantão em feriado
+91000406,credito,1.00,plantao_feriado,2026-09-10,2027-03-09,Plantão em feriado
+91000406,credito,2.00,horas_extras,2026-10-20,2027-04-18,Conversão de horas extras autorizadas em folga
+91000406,debito,1.00,gozo,2026-11-16,,Folga agendada
+91000418,credito,1.00,plantao_feriado,2026-09-26,2027-03-25,Plantão em feriado
+91000418,debito,1.00,gozo,2026-10-15,,Folga usufruída
+91000418,credito,1.00,plantao_feriado,2026-05-08,2026-11-04,Plantão em feriado
+91000418,debito,1.00,gozo,2026-07-06,,Folga usufruída
+91000418,credito,1.00,outros,2026-02-05,2026-08-04,Compensação autorizada pela chefia
+91000418,debito,1.00,gozo,2026-02-16,,Folga usufruída
+91000421,credito,1.00,outros,2026-01-14,2026-07-13,Compensação autorizada pela chefia
+91000421,credito,1.00,outros,2025-12-15,2026-06-13,Compensação autorizada pela chefia
+91000421,debito,1.00,gozo,2026-01-05,,Folga usufruída
+91000421,credito,2.00,plantao_feriado,2026-06-24,2026-12-21,Plantão em feriado
+91000421,debito,1.00,gozo,2026-08-17,,Folga usufruída

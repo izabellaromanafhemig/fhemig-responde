@@ -16,11 +16,19 @@ insert into public.dados_regras_rh
 values
   -- ------------------------------------------------------------ direito
   ('FER-01', 'Férias', 'Direito e duração das férias',
-   'O servidor tem direito a 25 dias úteis de férias por ano. Sábados, domingos e '
-   'feriados nacionais não contam como dias de férias. Ponto facultativo conta como '
-   'dia útil.',
+   'O servidor, efetivo ou contratado, tem direito a 25 dias úteis de férias por ano. '
+   'Sábados, domingos e feriados nacionais não contam como dias de férias. Ponto '
+   'facultativo conta como dia útil.',
    'Lei Estadual nº 869/1952 (Estatuto); Decreto nº 44.693/2007, alterado pelo Decreto nº 48.559/2022',
-   'efetivo', array['férias', 'dias úteis', 'direito', 'anual', '25 dias', 'ponto facultativo'],
+   'todos', array['férias', 'dias úteis', 'direito', 'anual', '25 dias', 'ponto facultativo'],
+   true, true),
+
+  ('FER-03', 'Férias', 'Férias de contratados',
+   'O servidor contratado também tem direito a 25 dias úteis de férias por ano e segue '
+   'as mesmas regras de marcação, divisão em períodos, alteração e pagamento do 1/3 '
+   'dos servidores efetivos.',
+   'Orientação da DGP/FHEMIG',
+   'contrato', array['férias', 'contrato', 'contratado', 'temporário', '25 dias úteis'],
    true, true),
 
   ('FER-04', 'Férias', 'Primeiras férias',

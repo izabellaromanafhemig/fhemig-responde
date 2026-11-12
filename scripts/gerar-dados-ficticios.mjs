@@ -210,14 +210,12 @@ function situacao(inicio, fim) {
   return "programada";
 }
 // Segue as regras FER-01, FER-04, FER-07 e FER-08:
-//  - efetivo: 25 dias úteis; contratado: 30 dias corridos (regra de
-//    contratados ainda a confirmar — FER-03)
+//  - efetivo e contratado: 25 dias úteis (FER-01 e FER-03)
 //  - primeiras férias só após 11 meses de exercício
 //  - no máximo 2 períodos, cada um com pelo menos 10 dias úteis
 //  - todos os períodos começam dentro do ano de referência (até o último
 //    dia útil); sem acúmulo: 2025 fica todo gozado
 for (const s of funcionais) {
-  const efetivo = s.vinculo === "efetivo";
   const adm = d(s.data_admissao);
   const elegivel = proximoDiaUtil(addMeses(adm, 11));
   const fimContrato = s.data_fim_prevista ? d(s.data_fim_prevista) : null;
@@ -227,20 +225,18 @@ for (const s of funcionais) {
     const inicioMin = new Date(Math.max(proximoDiaUtil(d(`${ano}-01-05`)), elegivel));
     if (inicioMin > ultimoUtil) continue; // ainda não completou 11 meses
 
-    const direito = efetivo ? 25 : 30;
+    const direito = 25;
     ferias.push({ masp: s.masp, ano_referencia: ano, dias_direito: direito,
-      observacao: efetivo ? "25 dias úteis" : "30 dias corridos (regra de contratados a confirmar)" });
+      observacao: "25 dias úteis" });
 
     // 2026: ~8% ainda não marcou nada (gera alerta de férias a programar)
     if (ano === 2026 && chance(0.08)) continue;
 
-    let partes = efetivo
-      ? pick([[25], [15, 10], [10, 15], [13, 12]])
-      : pick([[30], [15, 15]]);
+    let partes = pick([[25], [15, 10], [10, 15], [13, 12]]);
     // pouco tempo até o fim do ano: um período só
     if (partes.length === 2 && (ultimoUtil - inicioMin) / 86400000 < 100) partes = [direito];
 
-    const calcFim = (ini, dias) => (efetivo ? fimPorDiasUteis(ini, dias) : addDias(ini, dias - 1));
+    const calcFim = (ini, dias) => fimPorDiasUteis(ini, dias);
 
     // 1º período
     const limite1 = partes.length === 2 ? addDias(ultimoUtil, -80) : ultimoUtil;
@@ -400,7 +396,7 @@ writeFileSync(join(SAIDA, "dados_ficticios.sql"), sql, "utf8");
 console.log("dados_ficticios.sql");
 
 // Recarga de férias e folgas para quem JÁ importou os dados fictícios antigos.
-// Apaga só os MASPs fictícios "91…" e corrige os períodos do 002 (MASPs "9000…").
+// Apaga só os MASPs fictícios "91…" e refaz os períodos do 002 (MASPs "9000…").
 let recarga = `-- RECARGA de férias e folgas fictícias (gerado por scripts/gerar-dados-ficticios.mjs)
 -- Use se você JÁ importou os dados fictícios: substitui férias, períodos e folgas
 -- dos MASPs 91… pelos novos (que seguem as regras do 003) e corrige o 002.
@@ -416,15 +412,25 @@ recarga += sqlInsert("dados_ferias_periodos", periodos,
   ["masp", "ano_referencia", "data_inicio", "data_fim", "dias", "situacao"]) + "\n";
 recarga += sqlInsert("dados_folgas", folgas,
   ["masp", "tipo", "dias", "origem", "data_referencia", "validade", "descricao"]) + "\n";
-recarga += `-- Correções do 002_dados_teste.sql (sem efeito se o 002 não foi usado)
-update public.dados_ferias_periodos set data_inicio = '2026-12-07', data_fim = '2026-12-21'
-  where masp = '90000011' and ano_referencia = 2026 and data_inicio = '2027-01-04';
+recarga += `-- Correções do 002_dados_teste.sql (sem efeito se o 002 não foi usado):
+-- todos com 25 dias úteis (efetivos e contratados) e períodos dentro das regras.
+update public.dados_ferias set dias_direito = 25
+  where masp in ('90000011', '90000045') and ano_referencia = 2026;
 delete from public.dados_ferias_periodos
-  where masp = '90000029' and situacao = 'cancelada' and data_inicio = '2026-05-04';
-update public.dados_ferias_periodos set data_fim = '2026-12-28'
-  where masp = '90000029' and data_inicio = '2026-12-07';
-update public.dados_ferias_periodos set data_fim = '2026-11-30'
-  where masp = '90000053' and data_inicio = '2026-11-09';
+  where masp in ('90000011', '90000029', '90000037', '90000053');
+insert into public.dados_ferias_periodos
+  (masp, ano_referencia, data_inicio, data_fim, dias, situacao)
+select v.masp, v.ano, v.ini::date, v.fim::date, v.dias, v.sit
+from (values
+  ('90000011', 2026, '2026-07-06', '2026-07-24', 15, 'gozada'),
+  ('90000011', 2026, '2026-12-07', '2026-12-18', 10, 'programada'),
+  ('90000029', 2026, '2026-04-06', '2026-04-17', 10, 'gozada'),
+  ('90000029', 2026, '2026-12-07', '2026-12-28', 15, 'programada'),
+  ('90000037', 2026, '2026-02-02', '2026-03-06', 25, 'gozada'),
+  ('90000053', 2026, '2026-11-09', '2026-11-30', 15, 'em_gozo')
+) as v(masp, ano, ini, fim, dias, sit)
+where exists (select 1 from public.dados_ferias f
+              where f.masp = v.masp and f.ano_referencia = v.ano);
 
 commit;
 `;
