@@ -1,0 +1,61 @@
+masp,nome,data_admissao,vinculo,data_fim_prevista,formacao,carreira,categoria_profissional,unidade_lotacao
+91000011,Thiago Martins Silva,2020-01-16,efetivo,,especializacao,PENF,Enfermeiro,Hospital Regional João Penido
+91000014,Henrique Nascimento Fonseca,2024-02-04,contrato,2027-11-06,especializacao,MED,Médico Clínico,Hospital Regional João Penido
+91000023,Carlos Costa Cardoso,2023-02-26,contrato,2027-02-07,especializacao,MED,Médico Intensivista,Hospital Alberto Cavalcanti
+91000034,Leonardo Almeida Santos,2023-04-07,contrato,2027-08-10,mestrado,MED,Médico Clínico,Hospital Infantil João Paulo II
+91000035,Tatiane Souza Vieira,2023-10-15,contrato,2027-07-20,especializacao,MED,Médica Cirurgiã Geral,Hospital João XXIII
+91000043,Igor Lima Nascimento,2007-09-16,efetivo,,doutorado,AGAS,Psicólogo,Administração Central
+91000052,Luciana Martins Teixeira,2020-10-06,efetivo,,superior,PENF,Técnica de Enfermagem,Hospital João XXIII
+91000062,Ricardo Dias Santos,2014-03-03,efetivo,,especializacao,MED,Médico Anestesiologista,Hospital Eduardo de Menezes
+91000064,Renata Teixeira Silva,2022-01-05,efetivo,,mestrado,PENF,Enfermeira,Hospital Regional João Penido
+91000075,Daniela Campos Ferreira,2001-10-28,efetivo,,ensino_tecnico,PENF,Técnica de Enfermagem,Hospital João XXIII
+91000081,Gustavo Campos Teixeira,2011-02-07,efetivo,,superior,AUAS,Auxiliar Administrativo,Administração Central
+91000085,Fernanda Lima Rezende,2024-03-14,efetivo,,especializacao,MED,Médica Pediatra,Hospital Regional de Barbacena
+91000094,Sérgio Silva Martins,2023-04-07,efetivo,,ensino_tecnico,TOS,Técnico de Laboratório,Administração Central
+91000100,Beatriz Costa Melo,2000-07-03,efetivo,,ensino_tecnico,PENF,Técnica de Enfermagem,Hospital João XXIII
+91000107,Mariana Santos Vieira,2009-06-10,efetivo,,superior,AGAS,Analista Administrativa,Hospital Infantil João Paulo II
+91000116,Fábio Teixeira Gomes,2023-12-05,efetivo,,especializacao,MED,Médico Clínico,Administração Central
+91000124,Eduardo Ferreira Barbosa,2008-11-08,efetivo,,superior,AGAS,Nutricionista,Hospital Júlia Kubitschek
+91000132,Vinícius Vieira Fonseca,2025-07-19,contrato,2027-06-20,mestrado,PENF,Enfermeiro,Maternidade Odete Valadares
+91000133,Fábio Teixeira Silva,2025-05-04,contrato,2027-02-17,ensino_medio,AUAS,Auxiliar Administrativo,Administração Central
+91000140,Igor Dias Melo,2008-07-12,efetivo,,superior,PENF,Técnico de Enfermagem,Hospital João XXIII
+91000151,Beatriz Martins Vieira,2001-06-12,efetivo,,superior,PENF,Enfermeira,Administração Central
+91000154,Mariana Teixeira Lima,2015-11-13,efetivo,,superior,PENF,Enfermeira,Hospital Infantil João Paulo II
+91000164,Patrícia Ferreira Costa,2001-01-22,efetivo,,ensino_tecnico,PENF,Técnica de Enfermagem,Maternidade Odete Valadares
+91000168,Eduarda Costa Nascimento,2023-12-13,contrato,2027-04-24,especializacao,PENF,Enfermeira,Hospital Regional de Barbacena
+91000176,Larissa Campos Lima,2007-11-18,efetivo,,ensino_tecnico,TOS,Técnica de Laboratório,Hospital Alberto Cavalcanti
+91000184,Camila Souza Melo,2014-08-10,efetivo,,ensino_medio,AUAS,Auxiliar de Serviços Gerais,Hospital Regional João Penido
+91000191,Natália Cardoso Campos,2024-08-03,contrato,2027-07-29,superior,PENF,Técnica de Enfermagem,Hospital Regional João Penido
+91000196,Rodrigo Vieira Melo,2023-12-26,contrato,2027-07-25,ensino_tecnico,PENF,Técnico de Enfermagem,Hospital Eduardo de Menezes
+91000204,Mariana Moreira Fonseca,2011-06-09,efetivo,,ensino_fundamental,AUAS,Maqueira,Administração Central
+91000215,Eduardo Nascimento Teixeira,2019-04-24,efetivo,,ensino_tecnico,TOS,Técnico em Segurança do Trabalho,Hospital João XXIII
+91000218,Luciana Barbosa Ferreira,2015-10-30,efetivo,,especializacao,MED,Médica Clínica,Hospital Eduardo de Menezes
+91000229,Beatriz Souza Rezende,2023-11-19,contrato,2027-09-25,mestrado,MED,Médica Intensivista,Hospital Regional João Penido
+91000236,Felipe Gomes Melo,2015-09-08,efetivo,,mestrado,AGAS,Assistente Social,Hospital Júlia Kubitschek
+91000241,Juliana Souza Moreira,2003-11-21,efetivo,,superior,AUAS,Auxiliar Administrativa,Hospital Regional de Barbacena
+91000249,Simone Lima Dias,2004-06-06,efetivo,,ensino_tecnico,TOS,Técnica em Segurança do Trabalho,Hospital Regional de Barbacena
+91000252,Ricardo Pereira Teixeira,2009-06-23,efetivo,,superior,AGAS,Farmacêutico,Administração Central
+91000261,Fábio Nascimento Almeida,1998-10-14,efetivo,,ensino_medio,AUAS,Auxiliar Administrativo,Hospital João XXIII
+91000269,Vanessa Barbosa Dias,2006-11-13,efetivo,,especializacao,MED,Médica Anestesiologista,Hospital Regional João Penido
+91000273,Natália Melo Cardoso,2025-11-05,contrato,2027-09-03,superior,PENF,Enfermeira,Administração Central
+91000286,Felipe Gomes Lima,2025-05-10,contrato,2027-04-14,superior,AGAS,Fisioterapeuta,Hospital Alberto Cavalcanti
+91000291,Juliana Costa Rocha,2014-04-03,efetivo,,mestrado,AGAS,Analista Administrativa,Maternidade Odete Valadares
+91000299,Ricardo Nascimento Souza,2024-09-17,contrato,2027-08-26,ensino_tecnico,TOS,Técnico em Segurança do Trabalho,Hospital Júlia Kubitschek
+91000305,Juliana Lima Cardoso,1998-02-27,efetivo,,mestrado,MED,Médica Intensivista,Hospital Eduardo de Menezes
+91000309,Helena Gomes Dias,2017-05-08,efetivo,,ensino_fundamental,AUAS,Maqueira,Hospital Júlia Kubitschek
+91000318,Carlos Cardoso Lima,2000-06-06,efetivo,,ensino_tecnico,PENF,Técnico de Enfermagem,Administração Central
+91000328,Felipe Oliveira Barbosa,1998-05-24,efetivo,,superior,PENF,Técnico de Enfermagem,Hospital Júlia Kubitschek
+91000332,Rafael Melo Costa,2013-10-13,efetivo,,ensino_medio,AUAS,Auxiliar Administrativo,Maternidade Odete Valadares
+91000337,Eduarda Ribeiro Melo,2016-08-10,efetivo,,especializacao,MED,Médica Pediatra,Hospital Júlia Kubitschek
+91000348,Fábio Costa Barbosa,2024-09-28,contrato,2027-09-14,mestrado,MED,Médico Pediatra,Hospital Regional João Penido
+91000351,Patrícia Cardoso Melo,2000-11-17,efetivo,,mestrado,PENF,Enfermeira,Maternidade Odete Valadares
+91000360,Juliana Rezende Nascimento,2025-03-23,contrato,2027-02-11,superior,AGAS,Fisioterapeuta,Hospital Infantil João Paulo II
+91000366,Luciana Ferreira Moreira,2024-10-25,efetivo,,ensino_medio,AUAS,Auxiliar de Serviços Gerais,Hospital João XXIII
+91000375,Paulo Costa Souza,2001-07-17,efetivo,,especializacao,MED,Médico Pediatra,Hospital Júlia Kubitschek
+91000382,Henrique Cardoso Martins,2016-05-02,efetivo,,ensino_tecnico,TOS,Técnico em Radiologia,Hospital Regional de Barbacena
+91000388,Rafael Vieira Fonseca,2025-01-06,contrato,2026-11-30,ensino_fundamental,AUAS,Maqueiro,Hospital João XXIII
+91000395,Henrique Dias Barbosa,2002-10-23,efetivo,,especializacao,MED,Médico Anestesiologista,Hospital Eduardo de Menezes
+91000403,Vanessa Rezende Nascimento,2018-11-15,efetivo,,superior,PENF,Enfermeira,Hospital João XXIII
+91000406,Fábio Pereira Ferreira,2024-04-07,contrato,2026-11-27,doutorado,AGAS,Analista Administrativo,Hospital Regional de Barbacena
+91000418,Carlos Rocha Moreira,2017-07-26,efetivo,,superior,PENF,Técnico de Enfermagem,Maternidade Odete Valadares
+91000421,Rodrigo Cardoso Rocha,2009-05-24,efetivo,,mestrado,PENF,Enfermeiro,Hospital Regional de Barbacena
