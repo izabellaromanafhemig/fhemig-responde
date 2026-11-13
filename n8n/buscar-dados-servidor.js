@@ -72,6 +72,18 @@ const dadosServidor = [
   secao('Extrato de folgas compensativas', folgas),
 ].join('\n\n');
 
+// Orientações aprovadas pelo gestor (009). Se a tabela ainda não existir ou a
+// consulta falhar, o agente continua funcionando sem elas.
+let orientacoes = [];
+try {
+  orientacoes = await chamar('orientacoes_ia?select=id,texto,tema&ativa=eq.true&order=criada_em.asc&limit=30');
+} catch (e) {
+  orientacoes = [];
+}
+const orientacoesTexto = orientacoes.length
+  ? orientacoes.map((o) => `- [ORI-${o.id}]${o.tema ? ` (${o.tema})` : ''} ${o.texto}`).join('\n')
+  : '(nenhuma orientação no momento)';
+
 const regrasTexto = regras
   .map((r) =>
     `[${r.codigo}] ${r.tema} — ${r.titulo} (aplica a: ${r.aplica_vinculo}; ` +
@@ -88,5 +100,6 @@ return [{
     hoje: $now.setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy'),
     dados_servidor: dadosServidor,
     regras: regrasTexto,
+    orientacoes: orientacoesTexto,
   },
 }];
