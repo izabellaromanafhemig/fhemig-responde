@@ -45,8 +45,8 @@ export async function AuthButton() {
           className="inline-flex items-center gap-1.5 rounded-md border border-primary/40 px-2 py-1.5 text-brand-strong transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <LayoutDashboard className="h-4 w-4" aria-hidden />
-          <span className="hidden lg:inline">Painel</span>
-          <span className="sr-only lg:hidden">Painel do gestor</span>
+          <span className="hidden xl:inline">Painel</span>
+          <span className="sr-only xl:hidden">Painel do gestor</span>
         </Link>
       )}
       <Link

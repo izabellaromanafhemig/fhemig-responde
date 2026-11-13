@@ -12,7 +12,7 @@ export function Navbar() {
     <header className="w-full border-b-[3px] border-b-primary bg-card">
       <nav
         aria-label="Navegação principal"
-        className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3"
+        className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 lg:flex-nowrap"
       >
         <Link
           href="/"
@@ -33,7 +33,7 @@ export function Navbar() {
         <div className="order-3 w-full overflow-x-auto sm:order-none sm:w-auto sm:overflow-visible">
           <NavLinks />
         </div>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex shrink-0 items-center gap-1 text-sm">
           <ThemeSwitcher />
           {!hasEnvVars ? (
             <EnvVarWarning />

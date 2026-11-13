@@ -108,9 +108,17 @@ async function Inicio() {
       {alertas.length > 0 && <Alertas alertas={alertas} />}
 
       <section aria-labelledby="resumo" className="flex flex-col gap-3">
-        <h2 id="resumo" className="text-lg font-semibold">
-          Seu resumo
-        </h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="resumo" className="text-lg font-semibold">
+            Seu resumo
+          </h2>
+          <Link
+            href="/extratos"
+            className="text-sm font-medium text-brand-strong underline-offset-4 hover:underline"
+          >
+            Ver extratos completos
+          </Link>
+        </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <CartaoResumo
             icone={<Palmtree className="h-5 w-5" />}

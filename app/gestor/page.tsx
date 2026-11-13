@@ -14,7 +14,7 @@ import { Suspense } from "react";
 
 export const metadata = { title: "Painel do gestor | Fhemigo Responde" };
 
-const LIMITE_LISTA = 100;
+const POR_PAGINA = 20;
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -97,6 +97,11 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
     : "pendentes";
   const abaParam = Array.isArray(params.aba) ? params.aba[0] : params.aba;
   const aba: Aba = abaParam === "orientacoes" ? "orientacoes" : "respostas";
+  const paginaParam = Number(
+    Array.isArray(params.pagina) ? params.pagina[0] : params.pagina,
+  );
+  const pagina =
+    Number.isInteger(paginaParam) && paginaParam > 1 ? paginaParam : 1;
   const vazio = { data: [], error: null };
 
   // Resumo e orientações alimentam os contadores das duas abas;
@@ -109,12 +114,30 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
           p_inicio: inicio,
           p_fim: fim,
           p_tipo: tipo,
-          p_limite: LIMITE_LISTA,
+          p_limite: POR_PAGINA,
+          p_offset: (pagina - 1) * POR_PAGINA,
         })
       : Promise.resolve(vazio),
   ]);
 
-  if (resumoR.error || itensR.error) {
+  // Compatibilidade: se o 010 ainda não foi executado, a função não tem
+  // p_offset; mostra só a primeira página.
+  let semPaginacao = false;
+  let itensFinal = itensR;
+  if (itensR.error && aba === "respostas") {
+    const antigo = await supabase.rpc("painel_avaliacoes", {
+      p_inicio: inicio,
+      p_fim: fim,
+      p_tipo: tipo,
+      p_limite: POR_PAGINA,
+    });
+    if (!antigo.error) {
+      itensFinal = antigo;
+      semPaginacao = true;
+    }
+  }
+
+  if (resumoR.error || itensFinal.error) {
     return (
       <p className="text-sm text-destructive">
         Não foi possível carregar o painel. Confira se o script
@@ -124,7 +147,7 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
   }
 
   const r = (resumoR.data as Resumo[])[0];
-  const itens = (itensR.data ?? []) as Item[];
+  const itens = (itensFinal.data ?? []) as Item[];
   const orientacoes = (orientacoesR.data ?? []) as Orientacao[];
   const orientacoesAtivas = orientacoes.filter((o) => o.ativa).length;
 
@@ -139,6 +162,14 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
     positivas: r.positivas,
     sem_resposta: r.sem_resposta,
   };
+  const total = contagem[tipo];
+  const totalPaginas = Math.max(1, Math.ceil(total / POR_PAGINA));
+  // página além do fim (ex.: itens revisados enquanto navegava): vai para a última
+  if (aba === "respostas" && !semPaginacao && pagina > totalPaginas) {
+    redirect(qs({ aba: "respostas", tipo, pagina: String(totalPaginas) }));
+  }
+  const primeiro = total === 0 ? 0 : (pagina - 1) * POR_PAGINA + 1;
+  const ultimo = Math.min(pagina * POR_PAGINA, total);
 
   return (
     <>
@@ -360,10 +391,60 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
                 ))}
               </ul>
             )}
-            {itens.length === LIMITE_LISTA && (
+            {semPaginacao && total > POR_PAGINA && (
               <p className="text-xs text-muted-foreground">
-                Mostrando as {LIMITE_LISTA} mais recentes.
+                Mostrando as {POR_PAGINA} mais recentes. Execute o script
+                010_paginacao_painel.sql no Supabase para ver as demais.
               </p>
+            )}
+            {!semPaginacao && total > POR_PAGINA && (
+              <nav
+                aria-label="Páginas da lista"
+                className="flex flex-wrap items-center justify-between gap-3 text-sm"
+              >
+                <p className="text-muted-foreground" aria-live="polite">
+                  {primeiro}–{ultimo} de {total}
+                </p>
+                <div className="flex items-center gap-2">
+                  {pagina > 1 ? (
+                    <Button asChild size="sm" variant="outline">
+                      <Link
+                        href={qs({
+                          aba: "respostas",
+                          tipo,
+                          pagina: String(pagina - 1),
+                        })}
+                      >
+                        ← Anterior
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button size="sm" variant="outline" disabled>
+                      ← Anterior
+                    </Button>
+                  )}
+                  <span className="text-muted-foreground">
+                    Página {pagina} de {totalPaginas}
+                  </span>
+                  {pagina < totalPaginas ? (
+                    <Button asChild size="sm" variant="outline">
+                      <Link
+                        href={qs({
+                          aba: "respostas",
+                          tipo,
+                          pagina: String(pagina + 1),
+                        })}
+                      >
+                        Próxima →
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button size="sm" variant="outline" disabled>
+                      Próxima →
+                    </Button>
+                  )}
+                </div>
+              </nav>
             )}
           </section>
         </>

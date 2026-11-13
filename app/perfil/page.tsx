@@ -139,6 +139,13 @@ async function Perfil() {
         </Card>
       </div>
 
+      <Link
+        href="/extratos"
+        className="self-start text-sm font-medium text-brand-strong underline-offset-4 hover:underline"
+      >
+        Ver extratos de férias, folgas e frequência
+      </Link>
+
       <p className="flex items-start gap-2 text-sm text-muted-foreground">
         <InfoIcon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
         <span>
