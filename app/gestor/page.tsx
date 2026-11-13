@@ -1,14 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   OrientacoesGestor,
   type Orientacao,
 } from "@/components/orientacoes-gestor";
 import { RevisaoAvaliacao } from "@/components/revisao-avaliacao";
-import { lerFiltros } from "@/lib/historico-filtros";
-import { dataBr, hojeBrasilia } from "@/lib/inicio";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { Lock, ThumbsDown, ThumbsUp } from "lucide-react";
@@ -18,7 +14,6 @@ import { Suspense } from "react";
 
 export const metadata = { title: "Painel do gestor | Fhemigo Responde" };
 
-const DIAS_PADRAO = 30;
 const LIMITE_LISTA = 100;
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -32,14 +27,6 @@ type Resumo = {
   negativas: number;
   negativas_pendentes: number;
   servidores: number;
-};
-type Semana = {
-  semana: string;
-  perguntas: number;
-  respondidas: number;
-  avaliadas: number;
-  positivas: number;
-  negativas: number;
 };
 type Item = {
   id: string;
@@ -73,12 +60,6 @@ const formatoData = new Intl.DateTimeFormat("pt-BR", {
 const pct = (parte: number, total: number) =>
   total > 0 ? `${Math.round((100 * parte) / total)}%` : "—";
 
-function menosDias(iso: string, dias: number) {
-  const d = new Date(`${iso}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() - dias);
-  return d.toISOString().slice(0, 10);
-}
-
 // ---------------------------------------------------------------- página
 export default function GestorPage({
   searchParams,
@@ -107,15 +88,9 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
   const { data: gestor } = await supabase.rpc("eh_gestor");
   if (!gestor) return <AcessoRestrito />;
 
-  // Período: padrão = últimos 30 dias (inclui hoje)
-  const hoje = hojeBrasilia();
-  const temPeriodo = Boolean(params.de || params.ate);
-  const filtros = lerFiltros(
-    temPeriodo ? params : { de: menosDias(hoje, DIAS_PADRAO - 1), ate: hoje },
-  );
-  const inicio = filtros.inicioIso ?? "2000-01-01T00:00:00Z";
-  const fim =
-    filtros.fimExclusivoIso ?? new Date(Date.now() + 86_400_000).toISOString();
+  // Sem filtro de período: considera todo o histórico
+  const inicio = "2000-01-01T00:00:00Z";
+  const fim = new Date(Date.now() + 86_400_000).toISOString();
   const tipoParam = Array.isArray(params.tipo) ? params.tipo[0] : params.tipo;
   const tipo: Tipo = ABAS.some((a) => a.tipo === tipoParam)
     ? (tipoParam as Tipo)
@@ -125,13 +100,10 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
   const vazio = { data: [], error: null };
 
   // Resumo e orientações alimentam os contadores das duas abas;
-  // a evolução semanal e a lista só são buscadas na aba de respostas.
-  const [resumoR, orientacoesR, semanasR, itensR] = await Promise.all([
+  // a lista só é buscada na aba de respostas.
+  const [resumoR, orientacoesR, itensR] = await Promise.all([
     supabase.rpc("painel_resumo", { p_inicio: inicio, p_fim: fim }),
     supabase.rpc("painel_orientacoes"),
-    aba === "respostas"
-      ? supabase.rpc("painel_semanal", { p_inicio: inicio, p_fim: fim })
-      : Promise.resolve(vazio),
     aba === "respostas"
       ? supabase.rpc("painel_avaliacoes", {
           p_inicio: inicio,
@@ -142,7 +114,7 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
       : Promise.resolve(vazio),
   ]);
 
-  if (resumoR.error || semanasR.error || itensR.error) {
+  if (resumoR.error || itensR.error) {
     return (
       <p className="text-sm text-destructive">
         Não foi possível carregar o painel. Confira se o script
@@ -152,15 +124,12 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
   }
 
   const r = (resumoR.data as Resumo[])[0];
-  const semanas = (semanasR.data ?? []) as Semana[];
   const itens = (itensR.data ?? []) as Item[];
   const orientacoes = (orientacoesR.data ?? []) as Orientacao[];
   const orientacoesAtivas = orientacoes.filter((o) => o.ativa).length;
 
   const qs = (extra: Record<string, string>) => {
     const u = new URLSearchParams();
-    if (temPeriodo && filtros.de) u.set("de", filtros.de);
-    if (temPeriodo && filtros.ate) u.set("ate", filtros.ate);
     for (const [k, v] of Object.entries(extra)) u.set(k, v);
     return `/gestor?${u.toString()}`;
   };
@@ -232,10 +201,6 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
           aria-label="Orientações para o Fhemigo"
           className="flex flex-col gap-3"
         >
-          <p className="text-muted-foreground">
-            Correções aprovadas pelos gestores. O Fhemigo segue as orientações
-            ativas em todas as respostas, para todos os servidores.
-          </p>
           {orientacoesR.error ? (
             <p className="text-sm text-muted-foreground">
               Orientações indisponíveis. Execute o script 009_orientacoes_ia.sql
@@ -247,49 +212,6 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
         </section>
       ) : (
         <>
-          <p className="text-muted-foreground">
-            Qualidade das respostas do Fhemigo
-            {filtros.de && filtros.ate
-              ? ` de ${dataBr(filtros.de)} a ${dataBr(filtros.ate)}`
-              : ""}
-            . Quem perguntou não é identificado.
-          </p>
-
-          {/* Filtro de período */}
-          <form
-            method="get"
-            className="flex flex-wrap items-end gap-3 rounded-lg border p-4"
-          >
-            <input type="hidden" name="aba" value="respostas" />
-            <input type="hidden" name="tipo" value={tipo} />
-            <div className="grid gap-1.5">
-              <Label htmlFor="de">De</Label>
-              <Input id="de" name="de" type="date" defaultValue={filtros.de} />
-            </div>
-            <div className="grid gap-1.5">
-              <Label htmlFor="ate">Até</Label>
-              <Input
-                id="ate"
-                name="ate"
-                type="date"
-                defaultValue={filtros.ate}
-              />
-            </div>
-            <Button type="submit">Aplicar</Button>
-            {temPeriodo && (
-              <Button asChild variant="outline">
-                <Link href={`/gestor?aba=respostas&tipo=${tipo}`}>
-                  Últimos {DIAS_PADRAO} dias
-                </Link>
-              </Button>
-            )}
-            {filtros.erro && (
-              <p className="w-full text-sm text-amber-700 dark:text-amber-400">
-                {filtros.erro}
-              </p>
-            )}
-          </form>
-
           {/* Indicadores */}
           <section
             aria-labelledby="indicadores"
@@ -336,94 +258,6 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
             </div>
           </section>
 
-          {/* Evolução semanal */}
-          <section aria-labelledby="semanal" className="flex flex-col gap-3">
-            <h2 id="semanal" className="text-lg font-semibold">
-              Evolução por semana
-            </h2>
-            {semanas.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                Nenhuma pergunta no período.
-              </p>
-            ) : (
-              <div className="overflow-x-auto rounded-lg border">
-                <table className="w-full text-sm">
-                  <caption className="sr-only">
-                    Perguntas e avaliações por semana
-                  </caption>
-                  <thead className="bg-muted/60 text-left text-muted-foreground">
-                    <tr>
-                      <th scope="col" className="px-3 py-2 font-medium">
-                        Semana de
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        Perguntas
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        Respondidas
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        Avaliadas
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        👍
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        👎
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-2 text-right font-medium"
-                      >
-                        Úteis
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {semanas.map((s) => (
-                      <tr key={s.semana}>
-                        <td className="px-3 py-2">{dataBr(s.semana)}</td>
-                        <td className="px-3 py-2 text-right tabular-nums">
-                          {s.perguntas}
-                        </td>
-                        <td className="px-3 py-2 text-right tabular-nums">
-                          {s.respondidas}
-                        </td>
-                        <td className="px-3 py-2 text-right tabular-nums">
-                          {s.avaliadas}
-                        </td>
-                        <td className="px-3 py-2 text-right tabular-nums">
-                          {s.positivas}
-                        </td>
-                        <td className="px-3 py-2 text-right tabular-nums">
-                          {s.negativas}
-                        </td>
-                        <td className="px-3 py-2 text-right font-medium tabular-nums">
-                          {pct(s.positivas, s.avaliadas)}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </section>
-
           {/* Lista para revisão */}
           <section aria-labelledby="lista" className="flex flex-col gap-3">
             <h2 id="lista" className="text-lg font-semibold">
@@ -454,7 +288,7 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
               <p className="text-sm text-muted-foreground">
                 {tipo === "pendentes"
                   ? "Nenhuma resposta com 👎 aguardando revisão. 🎉"
-                  : "Nenhuma resposta nesta lista no período."}
+                  : "Nenhuma resposta nesta lista."}
               </p>
             ) : (
               <ul className="flex flex-col gap-3">
@@ -528,8 +362,7 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
             )}
             {itens.length === LIMITE_LISTA && (
               <p className="text-xs text-muted-foreground">
-                Mostrando as {LIMITE_LISTA} mais recentes. Reduza o período para
-                ver as demais.
+                Mostrando as {LIMITE_LISTA} mais recentes.
               </p>
             )}
           </section>
