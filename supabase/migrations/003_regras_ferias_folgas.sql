@@ -67,7 +67,7 @@ values
   ('FER-08', 'Férias', 'Prazo para tirar as férias e acúmulo',
    'As férias devem ser tiradas dentro do ano a que se referem. O último período tem que '
    'começar até o último dia útil desse ano. Não é permitido acumular férias. Em casos '
-   'excepcionais, a Administração aceita dois períodos no mesmo ano, gozados em datas '
+   'excepcionais, a Administração aceita dois períodos no mesmo ano, tirados em datas '
    'alternadas.',
    'Decreto nº 44.693/2007, alterado pelo Decreto nº 48.559/2022',
    'todos', array['acumular', 'prazo', 'ano', 'vencer', 'perder férias', 'último dia útil'],
@@ -99,7 +99,7 @@ values
 
   ('FER-11', 'Férias', 'Efeito da alteração no terço de férias',
    'Se o novo início das férias ficar no mesmo mês, não há acerto no pagamento do 1/3. '
-   'Se o início passar para outro mês, ou se as férias não forem gozadas, o RH precisa '
+   'Se o início passar para outro mês, ou se as férias não forem tiradas, o RH precisa '
    'ser avisado para acertar o pagamento. Valor de 1/3 recebido indevidamente é devolvido '
    'em parcela única, sem parcelamento.',
    'FAQ da Secretaria de Estado de Fazenda — parte das respostas é antiga',
@@ -117,7 +117,7 @@ values
    true, true),
 
   ('FER-13', 'Férias', 'Parto antecipado durante as férias',
-   'Se o parto acontecer durante as férias, elas são interrompidas e o saldo é gozado '
+   'Se o parto acontecer durante as férias, elas são interrompidas e o saldo é tirado '
    'logo após o fim da licença-maternidade.',
    'Decreto nº 44.693/2007, alterado pelo Decreto nº 48.559/2022',
    'todos', array['parto', 'antecipado', 'licença-maternidade', 'interromper férias'],
@@ -158,7 +158,7 @@ values
   ('FOL-02', 'Folgas', 'Folga compensatória por trabalho extra',
    'Horas trabalhadas além da jornada ou plantões em feriados podem ser compensados em '
    'folga compensatória (também chamada folga compensativa), desde que autorizados '
-   'previamente pela chefia. O gozo da folga também depende de agendamento com a chefia.',
+   'previamente pela chefia. O uso da folga também depende de agendamento com a chefia.',
    'Norma interna — a confirmar',
    'todos', array['folga', 'compensatória', 'compensativa', 'banco de horas', 'feriado', 'plantão'],
    false, true),

@@ -74,7 +74,7 @@ values
    'Posso deixar férias para o ano seguinte?',
    'Não. As férias devem ser tiradas dentro do ano a que se referem, e o último período '
    'tem que começar até o último dia útil desse ano. Não é permitido acumular férias. '
-   'Só em casos excepcionais a Administração aceita dois períodos no mesmo ano, gozados '
+   'Só em casos excepcionais a Administração aceita dois períodos no mesmo ano, tirados '
    'em datas alternadas.',
    array['FER-08']),
 
@@ -97,7 +97,7 @@ values
    'Fiquei doente durante as férias. Elas são interrompidas?',
    'Não. Licença de saúde, luto, casamento ou paternidade que caia durante as férias não '
    'as interrompe. A exceção é o parto antecipado: nesse caso as férias são '
-   'interrompidas e o saldo é gozado logo após o fim da licença-maternidade.',
+   'interrompidas e o saldo é tirado logo após o fim da licença-maternidade.',
    array['FER-14', 'FER-13']),
 
   ('ferias-convocado', 'Férias', 9,

@@ -105,7 +105,7 @@ insert into public.dados_regras_rh
   (codigo, tema, titulo, descricao, base_legal, aplica_vinculo, palavras_chave)
 values
   ('FER-01', 'Férias', 'Direito a férias anuais',
-   'O servidor efetivo tem direito a férias anuais, gozadas conforme a escala '
+   'O servidor efetivo tem direito a férias anuais, tiradas conforme a escala '
    'aprovada pela chefia. No Estatuto de MG o direito é de 25 dias úteis por ano.',
    'Lei Estadual nº 869/1952 (Estatuto), art. 152 — confirmar redação vigente',
    'efetivo', array['férias', 'dias', 'direito', 'anual']),
@@ -139,7 +139,7 @@ values
   ('FOL-02', 'Folgas', 'Folga compensativa por trabalho extra',
    'Horas trabalhadas além da jornada ou plantões em feriados podem ser '
    'compensados em folga, desde que autorizados previamente pela chefia. O '
-   'gozo da folga também depende de agendamento com a chefia.',
+   'uso da folga também depende de agendamento com a chefia.',
    'Norma interna — a confirmar',
    'todos', array['folga', 'compensativa', 'banco de horas', 'feriado', 'plantão']),
 

@@ -54,8 +54,8 @@ const SITUACAO: Record<
   { rotulo: string; variante: "default" | "secondary" | "outline" }
 > = {
   programada: { rotulo: "Programada", variante: "outline" },
-  em_gozo: { rotulo: "Em gozo", variante: "default" },
-  gozada: { rotulo: "Gozada", variante: "secondary" },
+  em_gozo: { rotulo: "Em andamento", variante: "default" },
+  gozada: { rotulo: "Concluída", variante: "secondary" },
   cancelada: { rotulo: "Cancelada", variante: "outline" },
 };
 
