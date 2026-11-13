@@ -147,7 +147,7 @@ async function Painel({ searchParams }: { searchParams: SearchParams }) {
       {/* Abas do painel */}
       <nav
         aria-label="Seções do painel"
-        className="-mb-2 flex gap-1 overflow-x-auto border-b"
+        className="-mb-2 flex flex-wrap gap-1 border-b"
       >
         {(
           [
